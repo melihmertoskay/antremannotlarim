@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2ec">
+  <title>Antrenman Notlarım</title>
+  <style>
+    :root {
+      --background: #f4f2ec;
+      --card: #fffefa;
+      --text: #22241f;
+      --muted: #73766f;
+      --line: #ddd9cf;
+      --green: #285e49;
+      --green-soft: #e2ece6;
+      --rust-soft: #f1e4d8;
+      --blue-soft: #e0ebef;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button { font: inherit; }
+    a { text-decoration: none; }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(244, 242, 236, .96);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      width: min(100% - 24px, 860px);
+      min-height: 64px;
+      margin: auto;
+      font-size: .95rem;
+      font-weight: 800;
+    }
+
+    main {
+      width: min(100% - 24px, 860px);
+      margin: 28px auto 56px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 14px;
+    }
+
+    .section-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      width: 100%;
+      min-height: 150px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      color: var(--text);
+      text-align: left;
+      box-shadow: 0 10px 34px rgba(45, 48, 41, .05);
+    }
+
+    .section-card:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    a.section-card {
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    a.section-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(45, 48, 41, .09);
+    }
+
+    .program { background: var(--rust-soft); }
+    .workouts { background: var(--green-soft); border-color: rgba(40, 94, 73, .25); }
+    .journal { background: var(--blue-soft); }
+
+    h1 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.65rem, 5vw, 2.2rem);
+      font-weight: 500;
+      letter-spacing: -.025em;
+    }
+
+    p {
+      max-width: 610px;
+      margin: 0;
+      color: #565b54;
+      font-size: .9rem;
+      line-height: 1.55;
+    }
+
+    .arrow {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      margin-left: 20px;
+      place-items: center;
+      border: 1px solid rgba(34, 36, 31, .17);
+      border-radius: 50%;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 520px) {
+      main { margin-top: 18px; }
+      .section-card { min-height: 140px; padding: 20px; }
+      .arrow { width: 34px; height: 34px; margin-left: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">Antrenman Notlarım</div>
+  </header>
+
+  <main>
+    <section class="cards" aria-label="Antrenman notları bölümleri">
+      <button class="section-card program" type="button" disabled>
+        <span>
+          <h1>Program</h1>
+          <p>Gün gün hedeflenen antrenman kartları ve haftalık çalışma düzeni.</p>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+
+      <a class="section-card workouts" href="antrenman-kartlari.html">
+        <span>
+          <h1>Antrenman Kartları</h1>
+          <p>Salon, ev ve yüzme için hazırlanan 40 dakikalık antrenman kartları.</p>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <button class="section-card journal" type="button" disabled>
+        <span>
+          <h1>Günlük</h1>
+          <p>Yapılan antrenmanlar, kullanılan ağırlıklar ve antrenman notları.</p>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+    </section>
+  </main>
+</body>
+</html>

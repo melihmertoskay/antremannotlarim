@@ -44,11 +44,15 @@
     .day-body li{margin:3px 0}
     .day-body>:last-child{margin-bottom:0}
     .kv{color:var(--text);font-weight:800}
-    .card-link{display:inline-block;margin-top:3px;color:var(--accent);font-size:.8rem;font-weight:800}
-    .card-link:hover{text-decoration:underline}
-    .progress{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);color:var(--muted);font-size:.79rem}
-    .alt{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:.82rem}
-    .alt .kv{display:block;margin-bottom:2px;color:var(--accent);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase}
+    .open-btn{display:inline-flex;align-items:center;gap:6px;margin-top:3px;padding:9px 16px;border-radius:10px;background:var(--accent);color:#fff;font-size:.85rem;font-weight:800}
+    .open-btn:hover{opacity:.9}
+    .progress{margin-top:12px;padding-top:11px;border-top:1px solid #ebe8e0;color:var(--muted);font-size:.79rem}
+    .alt{margin-top:12px;padding-top:11px;border-top:1px solid #ebe8e0}
+    .alt-label{display:block;margin-bottom:7px;color:var(--muted);font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .alt-list{display:grid;gap:6px}
+    .alt-item{display:flex;align-items:baseline;gap:7px;font-size:.78rem;color:var(--muted);line-height:1.5}
+    .alt-chip{flex:0 0 auto;padding:1px 7px;border:1px solid var(--line);border-radius:5px;color:var(--text);font-size:.71rem;font-weight:800}
+    .alt-chip:hover{border-color:var(--accent);color:var(--accent)}
     @media(max-width:470px){
       .topbar-inner{min-height:58px}.back{padding-right:13px}.title{font-size:.9rem}
       main{margin-top:18px}
@@ -80,7 +84,10 @@
             <li><span class="kv">Pike şınavı:</span> 3×8'de kal — omuz için en zorlayıcı hareket, sayıyı zorlama</li>
             <li><span class="kv">Dar tutuş şınav:</span> 3×12</li>
           </ul>`,
-        alt:{kod:"S1",metin:"Salona gidebiliyorsan S1'i (dambıl, göğüs-omuz-arka kol) tercih et — aynı kas grubunu daha ağır yükle çalıştırır."}},
+        alt:[
+          {kod:"S1",metin:"Salona gidebiliyorsan bunu tercih et — aynı kas grubunu daha ağır yükle çalıştırır."},
+          {kod:"Y2",metin:"Yüzmek istersen tempo olarak en yakın gün budur."}
+        ]},
       E2:{ad:"Bacak",yer:"ev",
         not:`<p>Evde bacak günü. Ağırlık yok; zorluk tek bacak çalışmasından ve tempodan geliyor.</p>
           <ul>
@@ -88,7 +95,10 @@
             <li><span class="kv">Yavaş squat:</span> 3 saniyede in, altta 1 saniye bekle</li>
             <li><span class="kv">Tek bacak glute bridge:</span> tepede 2 saniye sık</li>
           </ul>`,
-        alt:{kod:"S3",metin:"Salona gidebiliyorsan S3'ü (dambıl bacak) tercih et."}},
+        alt:[
+          {kod:"S3",metin:"Salona gidebiliyorsan bunu tercih et — aynı kas grubunu daha ağır yükle çalıştırır."},
+          {kod:"Y1",metin:"Yüzmek istersen bacaklar için en hafif gün budur."}
+        ]},
       E3:{ad:"Tam Vücut",yer:"ev",
         not:`<p>Evde tam vücut: squat, itiş, çekiş, kalça ve core aynı antrenmanda.</p>
           <ul>
@@ -96,7 +106,10 @@
             <li><span class="kv">Bant ile row:</span> 12. tekrarda zorlanacağın kalınlığı seç</li>
             <li><span class="kv">Yavaş squat:</span> 3 saniyede in, altta 1 saniye bekle</li>
           </ul>`,
-        alt:{kod:"S4",metin:"Salona gidebiliyorsan S4'ü (dambıl tam vücut) tercih et."}},
+        alt:[
+          {kod:"S4",metin:"Salona gidebiliyorsan bunu tercih et — aynı kas grubunu daha ağır yükle çalıştırır."},
+          {kod:"Y3",metin:"Yüzmek istersen kapsam olarak en yakın gün budur."}
+        ]},
       E4:{ad:"Çekiş",yer:"ev",
         not:`<p>Evde çekiş günü, direnç bandıyla.</p>
           <ul>
@@ -104,7 +117,10 @@
             <li><span class="kv">Row hareketleri:</span> direnç azsa bandı kısaltarak sertleştir</li>
             <li><span class="kv">Superman:</span> tepede 1 saniye bekle</li>
           </ul>`,
-        alt:{kod:"S2",metin:"Salona gidebiliyorsan S2'yi (dambıl sırt-omuz-kol) tercih et."}},
+        alt:[
+          {kod:"S2",metin:"Salona gidebiliyorsan bunu tercih et — aynı kas grubunu daha ağır yükle çalıştırır."},
+          {kod:"Y2",metin:"Yüzmek istersen tempo olarak en yakın gün budur."}
+        ]},
       S5:{ad:"Barbell 5×5 — A",yer:"salon",
         not:`<p>Squat, bench press, barbell row. Barbell'e ilk defa çıkıyorsan boş bar (20 kg) ile başla, ilk 1-2 antrenman tekniğe odaklan.</p>
           <ul>
@@ -113,7 +129,10 @@
             <li><span class="kv">Barbell row:</span> 20 kg, sırtı düz tutmaya dikkat et</li>
           </ul>
           <p>Squat'ı haftada iki kez (bu kart + S6) çalıştığın için her salon gününde 2,5 kg ekle. Bench ve row'u haftada bir kez çalıştığın için haftalık 2,5 kg ekle. Bir ağırlıkta 3 antrenman üst üste 5 setin 5 tekrarını tamamlayamazsan, %10 düşüp oradan devam et.</p>`,
-        alt:{kod:"E3",metin:"Salona gidemiyorsan E3 (Evde Tam Vücut) en yakın alternatiftir — squat, itiş ve çekiş üçü de var. Barbell'in ağırlığını karşılamaz, ama hareket kalıbı aynı."}},
+        alt:[
+          {kod:"E3",metin:"Salona gidemiyorsan en yakın alternatif — squat, itiş ve çekiş üçü de var, ama barbell'in ağırlığını karşılamaz."},
+          {kod:"Y3",metin:"Yüzmek istersen kapsam olarak en yakın gün budur."}
+        ]},
       S6:{ad:"Barbell 5×5 — B",yer:"salon",
         not:`<p>Squat, overhead press, deadlift.</p>
           <ul>
@@ -122,17 +141,20 @@
             <li><span class="kv">Deadlift:</span> 40 kg, tek set (1×5) — dambılla Romanian deadlift'te 10+10 kg çalıştığın için bu seviye makul bir başlangıç</li>
           </ul>
           <p>Deadlift'i haftada sadece bir kez çalıştığın ve toparlanması hızlı olduğu için haftalık 5 kg ekle. OHP'yi haftalık 2,5 kg ekle. Aynı 3-antrenman kuralı burada da geçerli.</p>`,
-        alt:{kod:"E4",metin:"Salona gidemiyorsan tam bir eşdeğeri yok. E4 (Bantla Sırt ve Çekiş) deadlift'in sırt/posterior zincir rolünü kısmen karşılar; squat ve overhead press'in karşılığı kalmaz. Bu günü atlamak yerine E2 (bacak) ile E4'ü aynı gün art arda yapmayı düşünebilirsin."}},
+        alt:[
+          {kod:"E4",metin:"Tam bir eşdeğeri yok; deadlift'in sırt rolünü kısmen karşılar, squat ve overhead press'in karşılığı kalmaz."},
+          {kod:"Y1",metin:"Yüzmek istersen deadlift sonrası yorgunluğu artırmayan en hafif gün budur."}
+        ]},
       Y1:{ad:"Yüzme",yer:"yuzme",
         not:`<p>Teknik ve rahat yüzme, toplam 500 m. 400 m kesintisiz yüzebildiğin için rahat gelmeli — hızı değil kulaç uzunluğunu düşün.</p>`,
-        alt:{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}},
+        alt:[{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}]},
       Y2:{ad:"Yüzme",yer:"yuzme",
         not:`<p>Kısa aralıklı yüzme, toplam 450 m. Haftanın en tempolu günü.</p>
           <p>8×25 m bölümü en zor kısmı; nefesin bir sonraki tekrara kadar toparlanmıyorsa arayı 30 saniyeden 45 saniyeye çıkar.</p>`,
-        alt:{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}},
+        alt:[{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}]},
       Y3:{ad:"Yüzme",yer:"yuzme",
         not:`<p>Kesintisiz yüzme, toplam 550 m. İçindeki 300 m kesintisiz bölüm 400 m'lik kapasitenin altında, istikrarlı tempoda geçmeli.</p>`,
-        alt:{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}}
+        alt:[{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}]}
     };
 
     // Pazartesi ev · Çarşamba ve Cuma salon (barbell, sabit A/B) · Cumartesi havuz.
@@ -170,9 +192,10 @@
         const yer=kod.startsWith("S")?"salon":(kod.startsWith("E")?"ev":"yuzme");
         const adi=GUNLER[tarih.getDay()];
         const ek=(tur==="ev"||tur==="yuzme")&&hi>=2?`<p class="progress">${ILERLEME}</p>`:"";
-        const altHtml=k.alt.kod
-          ? `<a class="card-link" href="kart.html#${k.alt.kod}">${k.alt.kod}</a> — ${k.alt.metin}`
-          : k.alt.metin;
+        const altHtml=k.alt.map(a=>{
+          const chip=a.kod?`<a class="alt-chip" href="kart.html#${a.kod}">${a.kod}</a>`:"";
+          return `<div class="alt-item">${chip}<span>${a.metin}</span></div>`;
+        }).join("");
         return `<details class="day">
           <summary>
             <span class="date">${tarih.getDate()} ${AYLAR[tarih.getMonth()]}</span>
@@ -181,8 +204,8 @@
             <span class="code ${yer}">${kod}</span>
             <span class="sign">+</span>
           </summary>
-          <div class="day-body">${k.not}<a class="card-link" href="kart.html#${kod}">${kod} kartını aç →</a>${ek}
-            <div class="alt"><span class="kv">Alternatif</span>${altHtml}</div>
+          <div class="day-body">${k.not}<a class="open-btn" href="kart.html#${kod}">${kod} kartını aç →</a>${ek}
+            <div class="alt"><span class="alt-label">Alternatif</span><div class="alt-list">${altHtml}</div></div>
           </div>
         </details>`;
       }).join("");

@@ -3,8 +3,6 @@ const KART_ADI={
   S2:"Sırt, Arka Omuz ve Ön Kol",
   S3:"Bacak, Kalça ve Baldır",
   S4:"Tam Vücut",
-  S5:"Barbell 5×5 — A",
-  S6:"Barbell 5×5 — B",
   E1:"Ekipmansız Üst Vücut",
   E2:"Ekipmansız Bacak ve Kalça",
   E3:"Evde Tam Vücut",

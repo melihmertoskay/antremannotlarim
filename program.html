@@ -47,6 +47,8 @@
     .card-link{display:inline-block;margin-top:3px;color:var(--accent);font-size:.8rem;font-weight:800}
     .card-link:hover{text-decoration:underline}
     .progress{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);color:var(--muted);font-size:.79rem}
+    .alt{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:.82rem}
+    .alt .kv{display:block;margin-bottom:2px;color:var(--accent);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase}
     @media(max-width:470px){
       .topbar-inner{min-height:58px}.back{padding-right:13px}.title{font-size:.9rem}
       main{margin-top:18px}
@@ -62,7 +64,7 @@
     <div class="topbar-inner"><a class="back" href="index.html">← Ana sayfa</a><span class="title">Program</span></div>
   </header>
   <main>
-    <p class="lede">17 Ağustos – 12 Eylül. Haftada üç gün: pazartesi ev, perşembe salon, cumartesi havuz. Bir güne dokunarak o günün ağırlık ve tempo önerilerini açabilirsin; kullandığın ağırlıkları kartın günlüğüne yaz.</p>
+    <p class="lede">17 Ağustos – 12 Eylül. Haftada dört gün: pazartesi ev, çarşamba ve cuma salon (barbell 5×5), cumartesi havuz. Bir güne dokunarak ağırlık önerilerini ve o gün yapılamazsa hangi kartın yerine geçebileceğini görebilirsin. Kullandığın ağırlıkları kartın günlüğüne yaz.</p>
     <div id="weeks"></div>
   </main>
   <script>
@@ -71,101 +73,91 @@
     const KISA={"Pazar":"Paz","Pazartesi":"Pzt","Salı":"Sal","Çarşamba":"Çar","Perşembe":"Per","Cuma":"Cum","Cumartesi":"Cmt"};
 
     const kartlar={
-      E3:{ad:"Tam Vücut",yer:"ev",not:`
-        <p>Evde tam vücut: squat, itiş, çekiş, kalça ve core aynı antrenmanda. Haftanın tek ev günü olduğu için geniş kapsamlı kart seçildi.</p>
-        <ul>
-          <li><span class="kv">Normal şınav:</span> kartta 3×10 yazıyor ama sen 4×20 yapabiliyorsun — <b>3×15</b> yap ya da inişi 3 saniyeye yayarak 3×10 yap</li>
-          <li><span class="kv">Bant ile row:</span> 12. tekrarda zorlanacağın kalınlığı seç; kolaysa bandı kısaltarak sertleştir</li>
-          <li><span class="kv">Yavaş squat:</span> 3 saniyede in, altta 1 saniye bekle</li>
-        </ul>`},
-      E1:{ad:"İtiş",yer:"ev",not:`
-        <p>Evde itiş günü. Ekipman gerekmez, zorluk tempodan ve varyasyondan geliyor.</p>
-        <ul>
-          <li><span class="kv">Normal şınav:</span> 3×10 sana hafif gelir, <b>3×18</b> yap</li>
-          <li><span class="kv">Pike şınavı:</span> 3×8'de kal — omuz için en zorlayıcı hareket, sayıyı zorlama</li>
-          <li><span class="kv">Dar tutuş şınav:</span> 3×12</li>
-        </ul>
-        <p>Sayı 20'yi geçmeye başladığında tekrar eklemek yerine inişi yavaşlat; kas gelişimi oradan gelir.</p>`},
-      E2:{ad:"Bacak",yer:"ev",not:`
-        <p>Evde bacak günü. Ağırlık yok; zorluk tek bacak çalışmasından ve tempodan geliyor.</p>
-        <ul>
-          <li><span class="kv">Bulgarian split squat:</span> her bacak 3×10; kolaysa arka ayağını daha yükseğe koy</li>
-          <li><span class="kv">Yavaş squat:</span> 3 saniyede in, altta 1 saniye bekle</li>
-          <li><span class="kv">Tek bacak glute bridge:</span> tepede 2 saniye sık</li>
-        </ul>`},
-      E4:{ad:"Çekiş",yer:"ev",not:`
-        <p>Evde çekiş günü, direnç bandıyla. S2'nin ev karşılığı.</p>
-        <ul>
-          <li><span class="kv">Bant seçimi:</span> 12. tekrarda zorlanacağın kalınlık</li>
-          <li><span class="kv">Row hareketleri:</span> direnç azsa bandı kısaltarak sertleştir</li>
-          <li><span class="kv">Superman:</span> tepede 1 saniye bekle</li>
-        </ul>`},
-      S1:{ad:"İtiş",yer:"salon",not:`
-        <p>Salonda itiş günü. Referansın: 7,5 kg dambılla çift kol 4×10.</p>
-        <ul>
-          <li><span class="kv">Dambıl bench press:</span> her elde 10 kg</li>
-          <li><span class="kv">Lateral raise:</span> her elde 4 kg — press'ten çok daha zayıf bir harekettir, 7,5 kg ile başlama</li>
-          <li><span class="kv">Incline press:</span> her elde 8 kg</li>
-          <li><span class="kv">Shoulder press:</span> her elde 7,5 kg</li>
-          <li><span class="kv">Triceps extension:</span> tek dambıl 8 kg</li>
-        </ul>
-        <p>Son iki tekrarda zorlanmıyorsan ağırlık hafif kalmış demektir.</p>`},
-      S2:{ad:"Çekiş",yer:"salon",not:`
-        <p>Salonda çekiş günü. Row hareketlerinde press'ten daha ağır kaldırabilirsin, çekiş genelde daha güçlüdür.</p>
-        <ul>
-          <li><span class="kv">Tek kol row:</span> 12,5 kg</li>
-          <li><span class="kv">Reverse fly:</span> her elde 4 kg</li>
-          <li><span class="kv">Pullover:</span> tek dambıl 10 kg</li>
-          <li><span class="kv">Biceps curl:</span> her elde 7,5 kg</li>
-          <li><span class="kv">Hammer curl:</span> her elde 7,5 kg</li>
-        </ul>`},
-      S3:{ad:"Bacak",yer:"salon",not:`
-        <p>Salonda bacak günü. Bacak üst vücuttan çok daha ağır kaldırır; buradaki sayılar dambıl referansından bağımsız.</p>
-        <ul>
-          <li><span class="kv">Goblet squat:</span> tek dambıl 14 kg</li>
-          <li><span class="kv">Romanian deadlift:</span> her elde 10 kg</li>
-          <li><span class="kv">Hip thrust:</span> tek dambıl 15 kg</li>
-          <li><span class="kv">Bulgarian split squat:</span> ilk sefer ağırlıksız, dengeni bulunca her elde 5 kg</li>
-          <li><span class="kv">Calf raise:</span> her elde 10 kg</li>
-        </ul>`},
-      S4:{ad:"Tam Vücut",yer:"salon",not:`
-        <p>Salonda tam vücut. Programın son salon günü; dört haftada geliştirdiğin ağırlıkları tek antrenmanda topluyor.</p>
-        <ul>
-          <li><span class="kv">Goblet squat:</span> tek dambıl 14 kg</li>
-          <li><span class="kv">Dambıl bench press:</span> her elde 10 kg</li>
-          <li><span class="kv">Tek kol row:</span> 12,5 kg</li>
-          <li><span class="kv">Romanian deadlift:</span> her elde 10 kg</li>
-          <li><span class="kv">Shoulder press:</span> her elde 7,5 kg</li>
-        </ul>
-        <p>Bu kartta her hareketin tek sırası var; ağırlığı bir önceki haftalarda günlüğe yazdığın değerden seç.</p>`},
-      Y1:{ad:"Yüzme",yer:"yuzme",not:`
-        <p>Teknik ve rahat yüzme, toplam 500 m. 400 m kesintisiz yüzebildiğin için rahat gelmeli — hızı değil kulaç uzunluğunu düşün.</p>`},
-      Y2:{ad:"Yüzme",yer:"yuzme",not:`
-        <p>Kısa aralıklı yüzme, toplam 450 m. Haftanın en tempolu günü.</p>
-        <p>8×25 m bölümü en zor kısmı; nefesin bir sonraki tekrara kadar toparlanmıyorsa arayı 30 saniyeden 45 saniyeye çıkar. Mesafeyi değil dinlenmeyi ayarla.</p>`},
-      Y3:{ad:"Yüzme",yer:"yuzme",not:`
-        <p>Kesintisiz yüzme, toplam 550 m. İçindeki 300 m kesintisiz bölüm senin 400 m'lik kapasitenin altında, istikrarlı tempoda geçmeli.</p>`}
+      E1:{ad:"İtiş",yer:"ev",
+        not:`<p>Evde itiş günü. Ekipman gerekmez, zorluk tempodan ve varyasyondan geliyor.</p>
+          <ul>
+            <li><span class="kv">Normal şınav:</span> 3×10 sana hafif gelir, <b>3×18</b> yap</li>
+            <li><span class="kv">Pike şınavı:</span> 3×8'de kal — omuz için en zorlayıcı hareket, sayıyı zorlama</li>
+            <li><span class="kv">Dar tutuş şınav:</span> 3×12</li>
+          </ul>`,
+        alt:{kod:"S1",metin:"Salona gidebiliyorsan S1'i (dambıl, göğüs-omuz-arka kol) tercih et — aynı kas grubunu daha ağır yükle çalıştırır."}},
+      E2:{ad:"Bacak",yer:"ev",
+        not:`<p>Evde bacak günü. Ağırlık yok; zorluk tek bacak çalışmasından ve tempodan geliyor.</p>
+          <ul>
+            <li><span class="kv">Bulgarian split squat:</span> her bacak 3×10; kolaysa arka ayağını daha yükseğe koy</li>
+            <li><span class="kv">Yavaş squat:</span> 3 saniyede in, altta 1 saniye bekle</li>
+            <li><span class="kv">Tek bacak glute bridge:</span> tepede 2 saniye sık</li>
+          </ul>`,
+        alt:{kod:"S3",metin:"Salona gidebiliyorsan S3'ü (dambıl bacak) tercih et."}},
+      E3:{ad:"Tam Vücut",yer:"ev",
+        not:`<p>Evde tam vücut: squat, itiş, çekiş, kalça ve core aynı antrenmanda.</p>
+          <ul>
+            <li><span class="kv">Normal şınav:</span> 3×15 yap, sana hafif gelir</li>
+            <li><span class="kv">Bant ile row:</span> 12. tekrarda zorlanacağın kalınlığı seç</li>
+            <li><span class="kv">Yavaş squat:</span> 3 saniyede in, altta 1 saniye bekle</li>
+          </ul>`,
+        alt:{kod:"S4",metin:"Salona gidebiliyorsan S4'ü (dambıl tam vücut) tercih et."}},
+      E4:{ad:"Çekiş",yer:"ev",
+        not:`<p>Evde çekiş günü, direnç bandıyla.</p>
+          <ul>
+            <li><span class="kv">Bant seçimi:</span> 12. tekrarda zorlanacağın kalınlık</li>
+            <li><span class="kv">Row hareketleri:</span> direnç azsa bandı kısaltarak sertleştir</li>
+            <li><span class="kv">Superman:</span> tepede 1 saniye bekle</li>
+          </ul>`,
+        alt:{kod:"S2",metin:"Salona gidebiliyorsan S2'yi (dambıl sırt-omuz-kol) tercih et."}},
+      S5:{ad:"Barbell 5×5 — A",yer:"salon",
+        not:`<p>Squat, bench press, barbell row. Barbell'e ilk defa çıkıyorsan boş bar (20 kg) ile başla, ilk 1-2 antrenman tekniğe odaklan.</p>
+          <ul>
+            <li><span class="kv">Squat:</span> 20 kg</li>
+            <li><span class="kv">Bench press:</span> 20 kg — dambılla 10+10 kg taşıyorsun ama barbell dengesi farklıdır, hafif başlamak doğru</li>
+            <li><span class="kv">Barbell row:</span> 20 kg, sırtı düz tutmaya dikkat et</li>
+          </ul>
+          <p>Squat'ı haftada iki kez (bu kart + S6) çalıştığın için her salon gününde 2,5 kg ekle. Bench ve row'u haftada bir kez çalıştığın için haftalık 2,5 kg ekle. Bir ağırlıkta 3 antrenman üst üste 5 setin 5 tekrarını tamamlayamazsan, %10 düşüp oradan devam et.</p>`,
+        alt:{kod:"E3",metin:"Salona gidemiyorsan E3 (Evde Tam Vücut) en yakın alternatiftir — squat, itiş ve çekiş üçü de var. Barbell'in ağırlığını karşılamaz, ama hareket kalıbı aynı."}},
+      S6:{ad:"Barbell 5×5 — B",yer:"salon",
+        not:`<p>Squat, overhead press, deadlift.</p>
+          <ul>
+            <li><span class="kv">Squat:</span> S5'te bıraktığın ağırlıktan devam</li>
+            <li><span class="kv">Overhead press:</span> 15-20 kg — en zayıf kaldıracağın hareket, omuzun yorgunsa 15 kg'da kal</li>
+            <li><span class="kv">Deadlift:</span> 40 kg, tek set (1×5) — dambılla Romanian deadlift'te 10+10 kg çalıştığın için bu seviye makul bir başlangıç</li>
+          </ul>
+          <p>Deadlift'i haftada sadece bir kez çalıştığın ve toparlanması hızlı olduğu için haftalık 5 kg ekle. OHP'yi haftalık 2,5 kg ekle. Aynı 3-antrenman kuralı burada da geçerli.</p>`,
+        alt:{kod:"E4",metin:"Salona gidemiyorsan tam bir eşdeğeri yok. E4 (Bantla Sırt ve Çekiş) deadlift'in sırt/posterior zincir rolünü kısmen karşılar; squat ve overhead press'in karşılığı kalmaz. Bu günü atlamak yerine E2 (bacak) ile E4'ü aynı gün art arda yapmayı düşünebilirsin."}},
+      Y1:{ad:"Yüzme",yer:"yuzme",
+        not:`<p>Teknik ve rahat yüzme, toplam 500 m. 400 m kesintisiz yüzebildiğin için rahat gelmeli — hızı değil kulaç uzunluğunu düşün.</p>`,
+        alt:{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}},
+      Y2:{ad:"Yüzme",yer:"yuzme",
+        not:`<p>Kısa aralıklı yüzme, toplam 450 m. Haftanın en tempolu günü.</p>
+          <p>8×25 m bölümü en zor kısmı; nefesin bir sonraki tekrara kadar toparlanmıyorsa arayı 30 saniyeden 45 saniyeye çıkar.</p>`,
+        alt:{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}},
+      Y3:{ad:"Yüzme",yer:"yuzme",
+        not:`<p>Kesintisiz yüzme, toplam 550 m. İçindeki 300 m kesintisiz bölüm 400 m'lik kapasitenin altında, istikrarlı tempoda geçmeli.</p>`,
+        alt:{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}}
     };
 
-    // Pazartesi ev · Perşembe salon · Cumartesi havuz.
-    // Kas grubu her hafta yer değiştiriyor: bir hafta evde olan, sonraki hafta salonda.
+    // Pazartesi ev · Çarşamba ve Cuma salon (barbell, sabit A/B) · Cumartesi havuz.
     const plan=[
-      {ev:"E3",salon:"S1",havuz:"Y1"},
-      {ev:"E1",salon:"S3",havuz:"Y2"},
-      {ev:"E2",salon:"S2",havuz:"Y3"},
-      {ev:"E4",salon:"S4",havuz:"Y2"}
+      {ev:"E3",yuzme:"Y1"},
+      {ev:"E1",yuzme:"Y2"},
+      {ev:"E2",yuzme:"Y3"},
+      {ev:"E4",yuzme:"Y1"}
     ];
-    const OFSET={ev:0,salon:3,havuz:5};
+    const OFSET={ev:0,salonA:2,salonB:4,yuzme:5};
     const ILERLEME="3–4. hafta: 1–2. haftada günlüğe yazdığın ağırlığın son setinde 2 fazla tekrar yapabildiysen 2–2,5 kg artır.";
 
     const basla=new Date(2026,7,17);
     const kutu=document.getElementById("weeks");
 
     plan.forEach((hafta,hi)=>{
-      const gunler=["ev","salon","havuz"].map(tur=>{
+      const gunler=[
+        {tur:"ev",kod:hafta.ev},
+        {tur:"salonA",kod:"S5"},
+        {tur:"salonB",kod:"S6"},
+        {tur:"yuzme",kod:hafta.yuzme}
+      ].map(g=>{
         const t=new Date(basla);
-        t.setDate(basla.getDate()+hi*7+OFSET[tur]);
-        return {kod:hafta[tur],tarih:t};
+        t.setDate(basla.getDate()+hi*7+OFSET[g.tur]);
+        return {...g,tarih:t};
       });
 
       const ilk=gunler[0].tarih,son=gunler[gunler.length-1].tarih;
@@ -173,19 +165,25 @@
         ? `${ilk.getDate()}–${son.getDate()} ${AYLAR[son.getMonth()]}`
         : `${ilk.getDate()} ${AYLAR[ilk.getMonth()]} – ${son.getDate()} ${AYLAR[son.getMonth()]}`;
 
-      const satirlar=gunler.map(({kod,tarih})=>{
+      const satirlar=gunler.map(({tur,kod,tarih})=>{
         const k=kartlar[kod];
+        const yer=kod.startsWith("S")?"salon":(kod.startsWith("E")?"ev":"yuzme");
         const adi=GUNLER[tarih.getDay()];
-        const ek=hi>=2?`<p class="progress">${ILERLEME}</p>`:"";
+        const ek=(tur==="ev"||tur==="yuzme")&&hi>=2?`<p class="progress">${ILERLEME}</p>`:"";
+        const altHtml=k.alt.kod
+          ? `<a class="card-link" href="kart.html#${k.alt.kod}">${k.alt.kod}</a> — ${k.alt.metin}`
+          : k.alt.metin;
         return `<details class="day">
           <summary>
             <span class="date">${tarih.getDate()} ${AYLAR[tarih.getMonth()]}</span>
             <span class="wd"><span class="wd-long">${adi}</span><span class="wd-short">${KISA[adi]}</span></span>
             <span class="work">${k.ad}</span>
-            <span class="code ${k.yer}">${kod}</span>
+            <span class="code ${yer}">${kod}</span>
             <span class="sign">+</span>
           </summary>
-          <div class="day-body">${k.not}<a class="card-link" href="kart.html#${kod}">${kod} kartını aç →</a>${ek}</div>
+          <div class="day-body">${k.not}<a class="card-link" href="kart.html#${kod}">${kod} kartını aç →</a>${ek}
+            <div class="alt"><span class="kv">Alternatif</span>${altHtml}</div>
+          </div>
         </details>`;
       }).join("");
 

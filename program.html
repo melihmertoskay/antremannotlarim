@@ -9,24 +9,22 @@
     :root{--bg:#f4f2ec;--card:#fffefa;--text:#22241f;--muted:#73766f;--line:#ddd9cf;--accent:#285e49;--salon:#285e49;--ev:#985a27;--yuzme:#286987}
     *{box-sizing:border-box}
     body{min-width:320px;margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-    a{text-decoration:none}
+    a{text-decoration:none;color:inherit}
     .topbar{border-bottom:1px solid var(--line);background:rgba(244,242,236,.96)}
     .topbar-inner{display:flex;align-items:center;gap:18px;width:min(100% - 24px,760px);min-height:64px;margin:auto}
     .back{padding-right:18px;border-right:1px solid var(--line);color:var(--text);font-size:.8rem;font-weight:800;white-space:nowrap}
     .back:hover{color:var(--accent)}
     .title{font-size:.95rem;font-weight:800}
     main{width:min(100% - 24px,760px);margin:24px auto 56px}
-    .lede{margin:0 0 20px;color:var(--muted);font-size:.83rem;line-height:1.5}
     .week{margin-bottom:20px}
     .week:last-child{margin-bottom:0}
-    .week-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:0 4px 7px;color:var(--muted);font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
-    .week-range{font-weight:650;letter-spacing:.02em;text-transform:none}
+    .week-head{padding:0 4px 7px;color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.02em}
     .week-body{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--card)}
     .day{border-bottom:1px solid #ebe8e0}
     .day:last-child{border-bottom:0}
-    .day>summary{display:grid;grid-template-columns:78px 68px 1fr auto 14px;align-items:center;gap:9px;padding:0 15px;min-height:48px;list-style:none;cursor:pointer}
-    .day>summary::-webkit-details-marker{display:none}
-    .day>summary:hover{background:#f7f5ef}
+    .day-row{display:grid;grid-template-columns:78px 68px 1fr auto 34px;align-items:center;gap:9px;padding:0 15px;min-height:48px}
+    .day-row:hover{background:#f7f5ef}
+    .day-link{display:contents}
     .date{font-size:.78rem;font-weight:800;white-space:nowrap}
     .wd{color:var(--muted);font-size:.76rem;white-space:nowrap}
     .wd-short{display:none}
@@ -35,17 +33,16 @@
     .code.salon{background:#e5eee9;color:var(--salon)}
     .code.ev{background:#f4e8dc;color:var(--ev)}
     .code.yuzme{background:#e1eef3;color:var(--yuzme)}
-    .sign{color:var(--muted);font-size:.95rem;text-align:center}
-    .day[open]>summary{background:#f7f5ef}
-    .day[open] .sign{color:var(--text)}
-    .day-body{padding:3px 15px 16px;color:#4d514b;font-size:.84rem;line-height:1.6}
+    .toggle{display:grid;place-items:center;width:28px;height:28px;margin-left:auto;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--muted);font:inherit;font-size:1rem;cursor:pointer}
+    .toggle:hover{border-color:var(--accent);color:var(--accent)}
+    .day.open .toggle{color:var(--text);border-color:var(--text)}
+    .day-body{display:none;padding:3px 15px 16px;color:#4d514b;font-size:.84rem;line-height:1.6}
+    .day.open .day-body{display:block}
     .day-body p{margin:0 0 9px}
     .day-body ul{margin:0 0 9px;padding-left:18px}
     .day-body li{margin:3px 0}
     .day-body>:last-child{margin-bottom:0}
     .kv{color:var(--text);font-weight:800}
-    .open-btn{display:inline-flex;align-items:center;gap:6px;margin-top:3px;padding:9px 16px;border-radius:10px;background:var(--accent);color:#fff;font-size:.85rem;font-weight:800}
-    .open-btn:hover{opacity:.9}
     .progress{margin-top:12px;padding-top:11px;border-top:1px solid #ebe8e0;color:var(--muted);font-size:.79rem}
     .alt{margin-top:12px;padding-top:11px;border-top:1px solid #ebe8e0}
     .alt-label{display:block;margin-bottom:7px;color:var(--muted);font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
@@ -56,7 +53,7 @@
     @media(max-width:470px){
       .topbar-inner{min-height:58px}.back{padding-right:13px}.title{font-size:.9rem}
       main{margin-top:18px}
-      .day>summary{grid-template-columns:70px 34px 1fr auto 12px;gap:7px;padding:0 12px;min-height:46px}
+      .day-row{grid-template-columns:70px 34px 1fr auto 30px;gap:7px;padding:0 12px;min-height:46px}
       .wd-long{display:none}.wd-short{display:inline}
       .date{font-size:.74rem}.wd{font-size:.72rem}.work{font-size:.78rem}
       .day-body{padding:3px 12px 15px}
@@ -68,7 +65,6 @@
     <div class="topbar-inner"><a class="back" href="index.html">← Ana sayfa</a><span class="title">Program</span></div>
   </header>
   <main>
-    <p class="lede">17 Ağustos – 12 Eylül. Haftada dört gün: pazartesi ev, çarşamba ve cuma salon (barbell 5×5), cumartesi havuz. Bir güne dokunarak ağırlık önerilerini ve o gün yapılamazsa hangi kartın yerine geçebileceğini görebilirsin. Kullandığın ağırlıkları kartın günlüğüne yaz.</p>
     <div id="weeks"></div>
   </main>
   <script>
@@ -77,6 +73,61 @@
     const KISA={"Pazar":"Paz","Pazartesi":"Pzt","Salı":"Sal","Çarşamba":"Çar","Perşembe":"Per","Cuma":"Cum","Cumartesi":"Cmt"};
 
     const kartlar={
+      S1:{ad:"İtiş",yer:"salon",
+        not:`<p>Salonda itiş günü. Günlükte 16 Ağustos'ta kaydettiğin ağırlıklardan devam et.</p>
+          <ul>
+            <li><span class="kv">Bench press:</span> her elde 10 kg</li>
+            <li><span class="kv">Lateral raise:</span> her elde 4 kg</li>
+            <li><span class="kv">Incline press:</span> her elde 8 kg</li>
+            <li><span class="kv">Shoulder press:</span> her elde 7,5 kg</li>
+            <li><span class="kv">Triceps extension:</span> tek dambıl 10 kg</li>
+          </ul>
+          <p>Son iki tekrarda zorlanmıyorsan haftalık 2,5 kg ekle.</p>`,
+        alt:[
+          {kod:"E1",metin:"Salona gidemiyorsan bunu tercih et — aynı kas grubu, ekipmansız."},
+          {kod:"Y2",metin:"Yüzmek istersen tempo olarak en yakın gün budur."}
+        ]},
+      S2:{ad:"Çekiş",yer:"salon",
+        not:`<p>Salonda çekiş günü.</p>
+          <ul>
+            <li><span class="kv">Tek kol row:</span> 12,5 kg</li>
+            <li><span class="kv">Reverse fly:</span> her elde 4 kg</li>
+            <li><span class="kv">Pullover:</span> tek dambıl 10 kg</li>
+            <li><span class="kv">Biceps curl:</span> her elde 7,5 kg</li>
+            <li><span class="kv">Hammer curl:</span> her elde 7,5 kg</li>
+          </ul>
+          <p>Son iki tekrarda zorlanmıyorsan haftalık 2,5 kg ekle.</p>`,
+        alt:[
+          {kod:"E4",metin:"Salona gidemiyorsan bunu tercih et — bant ile aynı kas grubu."},
+          {kod:"Y2",metin:"Yüzmek istersen tempo olarak en yakın gün budur."}
+        ]},
+      S3:{ad:"Bacak",yer:"salon",
+        not:`<p>Salonda bacak günü. Deadlift dışında tamamen dambılla.</p>
+          <ul>
+            <li><span class="kv">Goblet squat:</span> tek dambıl 14 kg</li>
+            <li><span class="kv">Deadlift:</span> 40 kg, 3 × 5 — dambılla aynı ağırlıkta yapılamayacak tek hareket, bunun için bir barbell gerekir</li>
+            <li><span class="kv">Hip thrust:</span> tek dambıl 15 kg</li>
+            <li><span class="kv">Bulgarian split squat:</span> her bacak 5 kg</li>
+            <li><span class="kv">Calf raise:</span> her elde 10 kg</li>
+          </ul>
+          <p>Deadlift'i haftada bir kez çalıştığın için haftalık 5 kg ekle, diğerlerinde haftalık 2,5 kg. Deadlift'te 3 antrenman üst üste 5 tekrarı tamamlayamazsan %10 düş.</p>`,
+        alt:[
+          {kod:"E2",metin:"Salona gidemiyorsan bunu tercih et — aynı kas grubu, ekipmansız."},
+          {kod:"Y1",metin:"Yüzmek istersen bacaklar için en hafif gün budur."}
+        ]},
+      S4:{ad:"Tam Vücut",yer:"salon",
+        not:`<p>Salonda tam vücut, tamamen dambılla — vaktin azsa ya da bir süredir ara verdiysen bu kart tek başına yeter.</p>
+          <ul>
+            <li><span class="kv">Goblet squat:</span> tek dambıl 14 kg</li>
+            <li><span class="kv">Bench press:</span> her elde 10 kg</li>
+            <li><span class="kv">Tek kol row:</span> 12,5 kg</li>
+            <li><span class="kv">Romanian deadlift:</span> her elde 10 kg</li>
+            <li><span class="kv">Shoulder press:</span> her elde 7,5 kg</li>
+          </ul>`,
+        alt:[
+          {kod:"E3",metin:"Salona gidemiyorsan bunu tercih et — aynı üç örüntü, ekipmansız."},
+          {kod:"Y3",metin:"Yüzmek istersen kapsam olarak en yakın gün budur."}
+        ]},
       E1:{ad:"İtiş",yer:"ev",
         not:`<p>Evde itiş günü. Ekipman gerekmez, zorluk tempodan ve varyasyondan geliyor.</p>
           <ul>
@@ -121,30 +172,6 @@
           {kod:"S2",metin:"Salona gidebiliyorsan bunu tercih et — aynı kas grubunu daha ağır yükle çalıştırır."},
           {kod:"Y2",metin:"Yüzmek istersen tempo olarak en yakın gün budur."}
         ]},
-      S5:{ad:"Barbell 5×5 — A",yer:"salon",
-        not:`<p>Squat, bench press, barbell row. Barbell'e ilk defa çıkıyorsan boş bar (20 kg) ile başla, ilk 1-2 antrenman tekniğe odaklan.</p>
-          <ul>
-            <li><span class="kv">Squat:</span> 20 kg</li>
-            <li><span class="kv">Bench press:</span> 20 kg — dambılla 10+10 kg taşıyorsun ama barbell dengesi farklıdır, hafif başlamak doğru</li>
-            <li><span class="kv">Barbell row:</span> 20 kg, sırtı düz tutmaya dikkat et</li>
-          </ul>
-          <p>Squat'ı haftada iki kez (bu kart + S6) çalıştığın için her salon gününde 2,5 kg ekle. Bench ve row'u haftada bir kez çalıştığın için haftalık 2,5 kg ekle. Bir ağırlıkta 3 antrenman üst üste 5 setin 5 tekrarını tamamlayamazsan, %10 düşüp oradan devam et.</p>`,
-        alt:[
-          {kod:"E3",metin:"Salona gidemiyorsan en yakın alternatif — squat, itiş ve çekiş üçü de var, ama barbell'in ağırlığını karşılamaz."},
-          {kod:"Y3",metin:"Yüzmek istersen kapsam olarak en yakın gün budur."}
-        ]},
-      S6:{ad:"Barbell 5×5 — B",yer:"salon",
-        not:`<p>Squat, overhead press, deadlift.</p>
-          <ul>
-            <li><span class="kv">Squat:</span> S5'te bıraktığın ağırlıktan devam</li>
-            <li><span class="kv">Overhead press:</span> 15-20 kg — en zayıf kaldıracağın hareket, omuzun yorgunsa 15 kg'da kal</li>
-            <li><span class="kv">Deadlift:</span> 40 kg, tek set (1×5) — dambılla Romanian deadlift'te 10+10 kg çalıştığın için bu seviye makul bir başlangıç</li>
-          </ul>
-          <p>Deadlift'i haftada sadece bir kez çalıştığın ve toparlanması hızlı olduğu için haftalık 5 kg ekle. OHP'yi haftalık 2,5 kg ekle. Aynı 3-antrenman kuralı burada da geçerli.</p>`,
-        alt:[
-          {kod:"E4",metin:"Tam bir eşdeğeri yok; deadlift'in sırt rolünü kısmen karşılar, squat ve overhead press'in karşılığı kalmaz."},
-          {kod:"Y1",metin:"Yüzmek istersen deadlift sonrası yorgunluğu artırmayan en hafif gün budur."}
-        ]},
       Y1:{ad:"Yüzme",yer:"yuzme",
         not:`<p>Teknik ve rahat yüzme, toplam 500 m. 400 m kesintisiz yüzebildiğin için rahat gelmeli — hızı değil kulaç uzunluğunu düşün.</p>`,
         alt:[{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}]},
@@ -157,12 +184,13 @@
         alt:[{kod:null,metin:"Havuz kapalıysa, o hafta kullanılmayan bir ev kartını hafif tempoda yap. Kardiyoyu tam karşılamaz ama haftayı boş bırakmamış olursun."}]}
     };
 
-    // Pazartesi ev · Çarşamba ve Cuma salon (barbell, sabit A/B) · Cumartesi havuz.
+    // Pazartesi ev · Çarşamba ve Cuma salon · Cumartesi havuz.
+    // Salon günlerinde ikişer bölge çalışıyor, üçüncüsü o hafta eve kalıyor — dönüşümlü.
     const plan=[
-      {ev:"E3",yuzme:"Y1"},
-      {ev:"E1",yuzme:"Y2"},
-      {ev:"E2",yuzme:"Y3"},
-      {ev:"E4",yuzme:"Y1"}
+      {ev:"E4",salonA:"S1",salonB:"S3",yuzme:"Y1"},
+      {ev:"E2",salonA:"S2",salonB:"S1",yuzme:"Y2"},
+      {ev:"E1",salonA:"S3",salonB:"S2",yuzme:"Y3"},
+      {ev:"E4",salonA:"S1",salonB:"S3",yuzme:"Y1"}
     ];
     const OFSET={ev:0,salonA:2,salonB:4,yuzme:5};
     const ILERLEME="3–4. hafta: 1–2. haftada günlüğe yazdığın ağırlığın son setinde 2 fazla tekrar yapabildiysen 2–2,5 kg artır.";
@@ -173,8 +201,8 @@
     plan.forEach((hafta,hi)=>{
       const gunler=[
         {tur:"ev",kod:hafta.ev},
-        {tur:"salonA",kod:"S5"},
-        {tur:"salonB",kod:"S6"},
+        {tur:"salonA",kod:hafta.salonA},
+        {tur:"salonB",kod:hafta.salonB},
         {tur:"yuzme",kod:hafta.yuzme}
       ].map(g=>{
         const t=new Date(basla);
@@ -182,10 +210,8 @@
         return {...g,tarih:t};
       });
 
-      const ilk=gunler[0].tarih,son=gunler[gunler.length-1].tarih;
-      const aralik=ilk.getMonth()===son.getMonth()
-        ? `${ilk.getDate()}–${son.getDate()} ${AYLAR[son.getMonth()]}`
-        : `${ilk.getDate()} ${AYLAR[ilk.getMonth()]} – ${son.getDate()} ${AYLAR[son.getMonth()]}`;
+      const pazartesi=gunler[0].tarih;
+      const haftaEtiketi=`${pazartesi.getDate()} ${AYLAR[pazartesi.getMonth()]} haftası`;
 
       const satirlar=gunler.map(({tur,kod,tarih})=>{
         const k=kartlar[kod];
@@ -196,32 +222,37 @@
           const chip=a.kod?`<a class="alt-chip" href="kart.html#${a.kod}">${a.kod}</a>`:"";
           return `<div class="alt-item">${chip}<span>${a.metin}</span></div>`;
         }).join("");
-        return `<details class="day">
-          <summary>
-            <span class="date">${tarih.getDate()} ${AYLAR[tarih.getMonth()]}</span>
-            <span class="wd"><span class="wd-long">${adi}</span><span class="wd-short">${KISA[adi]}</span></span>
-            <span class="work">${k.ad}</span>
-            <span class="code ${yer}">${kod}</span>
-            <span class="sign">+</span>
-          </summary>
-          <div class="day-body">${k.not}<a class="open-btn" href="kart.html#${kod}">${kod} kartını aç →</a>${ek}
+        return `<div class="day">
+          <div class="day-row">
+            <a class="day-link" href="kart.html#${kod}">
+              <span class="date">${tarih.getDate()} ${AYLAR[tarih.getMonth()]}</span>
+              <span class="wd"><span class="wd-long">${adi}</span><span class="wd-short">${KISA[adi]}</span></span>
+              <span class="work">${k.ad}</span>
+              <span class="code ${yer}">${kod}</span>
+            </a>
+            <button class="toggle" type="button" aria-expanded="false" aria-label="Detayları göster">+</button>
+          </div>
+          <div class="day-body">${k.not}${ek}
             <div class="alt"><span class="alt-label">Alternatif</span><div class="alt-list">${altHtml}</div></div>
           </div>
-        </details>`;
+        </div>`;
       }).join("");
 
       kutu.insertAdjacentHTML("beforeend",
         `<section class="week">
-          <div class="week-head"><span>${hi+1}. Hafta</span><span class="week-range">${aralik}</span></div>
+          <div class="week-head">${haftaEtiketi}</div>
           <div class="week-body">${satirlar}</div>
         </section>`);
     });
 
-    kutu.addEventListener("toggle",e=>{
-      const d=e.target;
-      if(d.tagName!=="DETAILS")return;
-      d.querySelector(".sign").textContent=d.open?"−":"+";
-    },true);
+    kutu.addEventListener("click",e=>{
+      const btn=e.target.closest(".toggle");
+      if(!btn)return;
+      const day=btn.closest(".day");
+      const acik=day.classList.toggle("open");
+      btn.textContent=acik?"−":"+";
+      btn.setAttribute("aria-expanded",acik?"true":"false");
+    });
   </script>
 </body>
 </html>

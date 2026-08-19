@@ -52,6 +52,7 @@
     .alt-list{display:grid}
     .alt-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;font-size:.8rem;color:var(--muted);line-height:1.4}
     .alt-item:not(:last-child){border-bottom:1px solid #ebe8e0}
+    .alt-item.primary span:first-child{color:var(--text);font-weight:700}
     .alt-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;padding:4px 9px;border-radius:7px;background:#eeece4;color:var(--text);font-size:.73rem;font-weight:800}
     .alt-chip:hover{background:var(--accent);color:#fff}
     @media(max-width:470px){
@@ -228,9 +229,10 @@
         const adi=GUNLER[tarih.getDay()];
         const baslik=KART_ADI[kod]||kod;
         const ek=(tur==="ev"||tur==="yuzme")&&hi>=2?`<p class="progress">${ILERLEME}</p>`:"";
-        const altHtml=k.alt.map(a=>{
+        const tumKartlar=[{kod,metin:"Bugünün kartı.",ana:true},...k.alt];
+        const kartlarHtml=tumKartlar.map(a=>{
           const chip=a.kod?`<a class="alt-chip" href="kart.html#${a.kod}">${a.kod} →</a>`:"";
-          return `<div class="alt-item"><span>${a.metin}</span>${chip}</div>`;
+          return `<div class="alt-item${a.ana?" primary":""}"><span>${a.metin}</span>${chip}</div>`;
         }).join("");
         return `<div class="day">
           <div class="day-row">
@@ -246,7 +248,7 @@
             <button class="toggle" type="button" aria-expanded="false" aria-label="Detayları göster">+</button>
           </div>
           <div class="day-body">${k.not}${ek}
-            <div class="alt"><span class="alt-label">Alternatif</span><div class="alt-list">${altHtml}</div></div>
+            <div class="alt"><span class="alt-label">Antrenman Kartları</span><div class="alt-list">${kartlarHtml}</div></div>
           </div>
         </div>`;
       }).join("");

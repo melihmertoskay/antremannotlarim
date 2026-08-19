@@ -10,11 +10,12 @@
     *{box-sizing:border-box}
     body{min-width:320px;margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
     a{text-decoration:none}
-    .topbar{border-bottom:1px solid var(--line);background:rgba(244,242,236,.96)}
-    .topbar-inner{display:flex;align-items:center;gap:18px;width:min(100% - 24px,760px);min-height:64px;margin:auto}
-    .back{padding-right:18px;border-right:1px solid var(--line);color:var(--text);font-size:.8rem;font-weight:800;white-space:nowrap}
-    .back:hover{color:var(--accent)}
-    .title{font-size:.95rem;font-weight:800}
+    .topbar{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(244,242,236,.96);backdrop-filter:blur(12px)}
+    .topbar-inner{display:flex;align-items:center;gap:4px;width:min(100% - 24px,760px);min-height:56px;margin:auto;overflow-x:auto;scrollbar-width:none}
+    .topbar-inner::-webkit-scrollbar{display:none}
+    .nav-link{flex:0 0 auto;padding:8px 12px;border-radius:8px;color:var(--muted);font-size:.85rem;font-weight:700;white-space:nowrap}
+    .nav-link:hover{color:var(--text);background:#ebe8e0}
+    .nav-link.active{color:var(--accent);background:#e5eee9}
     main{width:min(100% - 24px,760px);margin:24px auto 56px}
     .lede{margin:0 0 20px;color:var(--muted);font-size:.83rem;line-height:1.5}
     .empty{padding:28px 20px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--muted);font-size:.85rem;text-align:center}
@@ -46,7 +47,6 @@
     .card-link{display:inline-block;margin-top:3px;color:var(--accent);font-size:.8rem;font-weight:800}
     .card-link:hover{text-decoration:underline}
     @media(max-width:470px){
-      .topbar-inner{min-height:58px}.back{padding-right:13px}.title{font-size:.9rem}
       main{margin-top:18px}
       .day>summary{grid-template-columns:70px 34px 1fr auto 12px;gap:7px;padding:0 12px;min-height:46px}
       .wd-long{display:none}.wd-short{display:inline}
@@ -57,7 +57,12 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="topbar-inner"><a class="back" href="index.html">← Ana sayfa</a><span class="title">Günlük</span></div>
+    <nav class="topbar-inner">
+      <a class="nav-link" href="index.html">Ana Sayfa</a>
+      <a class="nav-link" href="program.html">Program</a>
+      <a class="nav-link" href="antrenman-kartlari.html">Kartlar</a>
+      <a class="nav-link active" href="gunluk.html">Günlük</a>
+    </nav>
   </header>
   <main>
     <p class="lede">Program hangi antrenmanın planlandığını gösterir, burası hangisinin gerçekten yapıldığını gösterir. Bir kartın günlüğüne kayıt eklendiğinde burada da otomatik görünür.</p>

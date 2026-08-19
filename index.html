@@ -33,19 +33,37 @@
     a { text-decoration: none; }
 
     .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       border-bottom: 1px solid var(--line);
       background: rgba(244, 242, 236, .96);
+      backdrop-filter: blur(12px);
     }
 
     .topbar-inner {
       display: flex;
       align-items: center;
+      gap: 4px;
       width: min(100% - 24px, 860px);
-      min-height: 64px;
+      min-height: 56px;
       margin: auto;
-      font-size: .95rem;
-      font-weight: 800;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
+    .topbar-inner::-webkit-scrollbar { display: none; }
+
+    .nav-link {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: .85rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .nav-link:hover { color: var(--text); background: #ebe8e0; }
+    .nav-link.active { color: var(--green); background: var(--green-soft); }
 
     main {
       width: min(100% - 24px, 860px);
@@ -127,7 +145,12 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="topbar-inner">Antrenman Notlarım</div>
+    <nav class="topbar-inner">
+      <a class="nav-link active" href="index.html">Ana Sayfa</a>
+      <a class="nav-link" href="program.html">Program</a>
+      <a class="nav-link" href="antrenman-kartlari.html">Kartlar</a>
+      <a class="nav-link" href="gunluk.html">Günlük</a>
+    </nav>
   </header>
 
   <main>

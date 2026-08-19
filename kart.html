@@ -8,11 +8,12 @@
   <style>
     :root{--bg:#f4f2ec;--card:#fffefa;--text:#22241f;--muted:#73766f;--line:#ddd9cf;--accent:#285e49;--soft:#e5eee9}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-    button{font:inherit}.menu{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(244,242,236,.96);backdrop-filter:blur(12px)}
-    .menu-inner{display:flex;align-items:center;gap:18px;width:min(100% - 24px,860px);min-height:66px;margin:auto;overflow-x:auto;scrollbar-width:none}.menu-inner::-webkit-scrollbar{display:none}
-    .home-link{flex:0 0 auto;padding-right:16px;border-right:1px solid var(--line);color:var(--text);font-size:.78rem;font-weight:800;text-decoration:none;white-space:nowrap}
-    .home-link:hover{color:var(--accent)}
-    main{width:min(100% - 24px,760px);margin:34px auto 60px}.card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:0 14px 42px rgba(45,48,41,.07)}
+    button{font:inherit}.topbar{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(244,242,236,.96);backdrop-filter:blur(12px)}
+    .topbar-inner{display:flex;align-items:center;gap:4px;width:min(100% - 24px,860px);min-height:56px;margin:auto;overflow-x:auto;scrollbar-width:none}.topbar-inner::-webkit-scrollbar{display:none}
+    .nav-link{flex:0 0 auto;padding:8px 12px;border-radius:8px;color:var(--muted);font-size:.85rem;font-weight:700;white-space:nowrap;text-decoration:none}
+    .nav-link:hover{color:var(--text);background:#ebe8e0}
+    .nav-link.active{color:#285e49;background:#e5eee9}
+    main{width:min(100% - 24px,760px);margin:26px auto 60px}.card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:0 14px 42px rgba(45,48,41,.07)}
     .card-header{display:flex;align-items:center;gap:15px;padding:22px 24px;border-bottom:1px solid var(--line)}.card-code{display:grid;flex:0 0 54px;width:54px;height:54px;place-items:center;border-radius:13px;background:var(--soft);color:var(--accent);font-size:1.1rem;font-weight:850}
     h1{margin:0 0 4px;font-size:clamp(1.28rem,4vw,1.7rem);line-height:1.15}.card-meta{margin:0;color:var(--muted);font-size:.84rem}.table-wrap{overflow-x:auto}
     table{width:100%;border-collapse:collapse;table-layout:fixed}th{padding:11px 12px;background:#f6f4ee;color:var(--muted);font-size:.69rem;letter-spacing:.06em;text-align:left;text-transform:uppercase}
@@ -38,13 +39,18 @@
     .modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line)}
     .modal-header h2{margin:0;font-size:1.2rem}.modal-close{display:grid;width:36px;height:36px;place-items:center;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--text);font-size:1.25rem;cursor:pointer}
     .modal-body{padding:20px}.exercise-image{display:block;width:100%;height:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:12px;background:#faf8f1}.modal-section{margin-bottom:18px}.modal-section:last-child{margin-bottom:0}.modal-section h3{margin:0 0 5px;color:var(--accent);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}.modal-section p{margin:0;line-height:1.6}.coming-soon{margin:0;color:var(--muted)}
-    @media(max-width:560px){.menu-inner{min-height:59px;gap:13px}.home-link{padding-right:12px}main{margin-top:20px}.card-header{padding:18px}th{padding:9px 7px;font-size:.62rem}td{padding:15px 7px;font-size:.86rem}th:nth-child(1),td:nth-child(1){width:34px}th:nth-child(2),td:nth-child(2){width:74px}th:nth-child(4),td:nth-child(4){width:79px}.time{font-size:.76rem}.target{white-space:normal}}
+    @media(max-width:560px){main{margin-top:20px}.card-header{padding:18px}th{padding:9px 7px;font-size:.62rem}td{padding:15px 7px;font-size:.86rem}th:nth-child(1),td:nth-child(1){width:34px}th:nth-child(2),td:nth-child(2){width:74px}th:nth-child(4),td:nth-child(4){width:79px}.time{font-size:.76rem}.target{white-space:normal}}
   </style>
 </head>
 <body>
-  <nav class="menu" aria-label="Kart sayfası"><div class="menu-inner">
-    <a class="home-link" href="antrenman-kartlari.html">← Tüm Kartlara Dön</a>
-  </div></nav>
+  <header class="topbar">
+    <nav class="topbar-inner">
+      <a class="nav-link" href="index.html">Ana Sayfa</a>
+      <a class="nav-link" href="program.html">Program</a>
+      <a class="nav-link active" href="antrenman-kartlari.html">Kartlar</a>
+      <a class="nav-link" href="gunluk.html">Günlük</a>
+    </nav>
+  </header>
   <main><article class="card">
     <header class="card-header"><div class="card-code" id="cardCode">S1</div><div><h1 id="cardTitle"></h1><p class="card-meta" id="cardMeta"></p></div></header>
     <div class="table-wrap"><table><thead><tr><th>Sıra</th><th>Süre</th><th>Hareket</th><th>Tekrar</th></tr></thead><tbody id="workoutRows"></tbody></table></div>

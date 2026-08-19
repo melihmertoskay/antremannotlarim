@@ -15,6 +15,5 @@ const KART_ADI={
 // Hangi kart kullanıldıysa kaydı buraya ekle; kartın kendi günlüğünde ve
 // gunluk.html arşivinde otomatik görünür.
 const GUNLUK=[
-  {tarih:"13 Ağustos 2026",kart:"S1",html:`<ul><li>Bench press: Her elde 9 kg, 3 × 10</li><li>Lateral raise: Her elde 4 kg, 3 × 10</li><li>Incline press: Her elde 7 kg, 3 × 10</li><li>Shoulder press: Her elde 6 kg, 3 × 8</li><li>Triceps extension: 8 kg, 3 × 10</li></ul><p>Shoulder pressin son setinde 10 tekrara çıkamadım, 8'de bıraktım. Geri kalanı rahat geçti.</p>`},
-  {tarih:"16 Ağustos 2026",kart:"S1",html:`<ul><li>Bench press: Her elde 10 kg, 3 × 10</li><li>Lateral raise: Her elde 4 kg, 3 × 10</li><li>Incline press: Her elde 8 kg, 3 × 10</li><li>Shoulder press: Her elde 6 kg, 3 × 10</li><li>Triceps extension: 10 kg, 3 × 10</li></ul><p>Bench pressin son seti zorlayıcıydı. Lateral raise hareketinin son iki tekrarında formu korumakta güçlük çektim. Omuz ağrısı olmadı.</p>`}
+  {tarih:"19 Ağustos 2026",kart:"S1",html:`<ul><li>Dambıl bench press: 10 kg, 3 × 10</li><li>Lateral raise: 7 kg, 3 × 10</li><li>Shoulder press: 7 kg, 3 × 10</li><li>Overhead triceps extension: tek dambıl 10 kg, 3 × 10</li></ul>`}
 ];

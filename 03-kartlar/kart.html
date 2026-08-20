@@ -46,10 +46,10 @@
   <header class="topbar">
     <nav class="topbar-inner">
       <a class="nav-link" href="../index.html">Ana Sayfa</a>
-      <a class="nav-link" href="../program/">Program</a>
-      <a class="nav-link" href="../gunluk/">Günlük</a>
-      <a class="nav-link active" href="../kartlar/">Kartlar</a>
-      <a class="nav-link" href="../egzersizler/">Egzersizler</a>
+      <a class="nav-link" href="../01-program/">Program</a>
+      <a class="nav-link" href="../02-gunluk/">Günlük</a>
+      <a class="nav-link active" href="../03-kartlar/">Kartlar</a>
+      <a class="nav-link" href="../04-egzersizler/">Egzersizler</a>
     </nav>
   </header>
   <main><article class="card">
@@ -66,8 +66,8 @@
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
-  <script src="../gunluk/gunlukverileri.js"></script>
-  <script src="../egzersizler/egzersizverileri.js"></script>
+  <script src="../02-gunluk/gunlukverileri.js"></script>
+  <script src="../04-egzersizler/egzersizverileri.js"></script>
   <script>
     const exerciseDetails=typeof EGZERSIZLER!=="undefined"?EGZERSIZLER:{};
     const workouts={
@@ -111,12 +111,8 @@
       Y3:{aim:"Kesintisiz yüzme süresini ve temel aerobik dayanıklılığı artırmayı amaçlar.",when:"Yüksek hızdan çok istikrarlı tempo çalışmak istediğinde ve omuzların yorgun olmadığında seçilebilir."}
     };
     const rows=document.getElementById("workoutRows"),journalContent=document.getElementById("journalContent"),aboutContent=document.getElementById("aboutContent"),journalDetails=document.getElementById("journalDetails"),aboutDetails=document.getElementById("aboutDetails");
-    function gunlukIcerigi(k){
-      const liste=(k.egzersizler||[]).length
-        ? `<ul>${k.egzersizler.map(e=>`<li>${e.ad}: ${e.agirlik}${e.setTekrar?`, ${e.setTekrar}`:""}</li>`).join("")}</ul>`
-        : "";
-      const not=k.aciklama?`<p>${k.aciklama}</p>`:"";
-      return liste+not;
+    function gunlukIcerigi(liste){
+      return `<ul>${liste.map(e=>`<li>${e.egzersiz}: ${e.agirlik||"ağırlık yok"}${e.setTekrar?`, ${e.setTekrar}`:""}${e.aciklama?` — ${e.aciklama}`:""}</li>`).join("")}</ul>`;
     }
     function showCard(code){
       const w=workouts[code];
@@ -124,11 +120,10 @@
       document.getElementById("cardCode").textContent=code;document.getElementById("cardTitle").textContent=w.title;document.getElementById("cardMeta").textContent=w.meta;document.title=code+" · "+w.title;
       rows.innerHTML=w.rows.map((r,i)=>`<tr><td>${i+1}</td><td class="time">${r[0]}</td><td class="exercise"><button class="exercise-button" data-exercise="${r[1]}">${r[1]}</button></td><td class="target">${r[2]}</td></tr>`).join("");
       const info=cardInfo[code];
-      const kayitlar=(typeof GUNLUK!=="undefined"?GUNLUK:[])
-        .filter(g=>g.kart===code)
-        .sort((a,b)=>(b.gun||b.tarih).localeCompare(a.gun||a.tarih));
+      const kayitlar=gunlukKayitlariniGetir().filter(g=>g.kart===code).sort((a,b)=>b.gun.localeCompare(a.gun));
+      const gruplar=kayitlar.reduce((o,k)=>((o[k.gun]||=[]).push(k),o),{});
       journalContent.innerHTML=kayitlar.length
-        ? `<div class="journal-list">${kayitlar.map(e=>`<details class="journal-entry"><summary>${e.tarih}</summary><div class="entry-body">${gunlukIcerigi(e)}</div></details>`).join("")}</div><a class="archive-link" href="../gunluk/">Tüm günlüğü gör →</a>`
+        ? `<div class="journal-list">${Object.keys(gruplar).sort().reverse().map(gun=>`<details class="journal-entry"><summary>${gunlukTarihEtiketi(gun)}</summary><div class="entry-body">${gunlukIcerigi(gruplar[gun])}</div></details>`).join("")}</div><a class="archive-link" href="../02-gunluk/">Tüm günlüğü gör →</a>`
         : '<p class="empty">Bu kart için henüz günlük kaydı yok.</p>';
       aboutContent.innerHTML=`<p><span class="about-label">Amaç</span>${info.aim}</p><p><span class="about-label">Ne zaman seçilmeli?</span>${info.when}</p>`;journalDetails.open=false;aboutDetails.open=false;
     }

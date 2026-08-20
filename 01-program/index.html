@@ -68,16 +68,16 @@
   <header class="topbar">
     <nav class="topbar-inner">
       <a class="nav-link" href="../index.html">Ana Sayfa</a>
-      <a class="nav-link active" href="../program/">Program</a>
-      <a class="nav-link" href="../gunluk/">Günlük</a>
-      <a class="nav-link" href="../kartlar/">Kartlar</a>
-      <a class="nav-link" href="../egzersizler/">Egzersizler</a>
+      <a class="nav-link active" href="../01-program/">Program</a>
+      <a class="nav-link" href="../02-gunluk/">Günlük</a>
+      <a class="nav-link" href="../03-kartlar/">Kartlar</a>
+      <a class="nav-link" href="../04-egzersizler/">Egzersizler</a>
     </nav>
   </header>
   <main>
     <div id="weeks"></div>
   </main>
-  <script src="../gunluk/gunlukverileri.js"></script>
+  <script src="../02-gunluk/gunlukverileri.js"></script>
   <script>
     const AYLAR=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
     const GUNLER=["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
@@ -232,12 +232,12 @@
         const ek=(tur==="ev"||tur==="yuzme")&&hi>=2?`<p class="progress">${ILERLEME}</p>`:"";
         const tumKartlar=[{kod,metin:"Bugünün kartı.",ana:true},...k.alt];
         const kartlarHtml=tumKartlar.map(a=>{
-          const chip=a.kod?`<a class="alt-chip" href="../kartlar/kart.html#${a.kod}">${a.kod} →</a>`:"";
+          const chip=a.kod?`<a class="alt-chip" href="../03-kartlar/kart.html#${a.kod}">${a.kod} →</a>`:"";
           return `<div class="alt-item${a.ana?" primary":""}"><span>${a.metin}</span>${chip}</div>`;
         }).join("");
         return `<div class="day">
           <div class="day-row">
-            <a class="day-link" href="../kartlar/kart.html#${kod}">
+            <a class="day-link" href="../03-kartlar/kart.html#${kod}">
               <span class="date">${tarih.getDate()} ${AYLAR[tarih.getMonth()]}</span>
               <span class="wd"><span class="wd-long">${adi}</span><span class="wd-short">${KISA[adi]}</span></span>
               <span class="title-cell">

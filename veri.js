@@ -12,8 +12,7 @@ const KART_ADI={
   Y3:"Kesintisiz Yüzme"
 };
 
-// Hangi kart kullanıldıysa kaydı buraya ekle; kartın kendi günlüğünde ve
-// gunluk.html arşivinde otomatik görünür.
+// Hangi kart kullanıldıysa kaydı buraya ekle; kartın kendi günlüğünde ve gunluk.html arşivinde otomatik görünür.
 const GUNLUK=[
   {tarih:"19 Ağustos 2026",kart:"S1",html:`<ul><li>Dambıl bench press: 10 kg, 3 × 10</li><li>Lateral raise: 7 kg, 3 × 10</li><li>Shoulder press: 7 kg, 3 × 10</li><li>Overhead triceps extension: tek dambıl 10 kg, 3 × 10</li></ul>`}
 ];

@@ -58,17 +58,18 @@
 <body>
   <header class="topbar">
     <nav class="topbar-inner">
-      <a class="nav-link" href="index.html">Ana Sayfa</a>
-      <a class="nav-link" href="program.html">Program</a>
-      <a class="nav-link" href="antrenman-kartlari.html">Kartlar</a>
-      <a class="nav-link active" href="gunluk.html">Günlük</a>
+      <a class="nav-link" href="../index.html">Ana Sayfa</a>
+      <a class="nav-link" href="../program/">Program</a>
+      <a class="nav-link active" href="../gunluk/">Günlük</a>
+      <a class="nav-link" href="../kartlar/">Kartlar</a>
+      <a class="nav-link" href="../egzersizler/">Egzersizler</a>
     </nav>
   </header>
   <main>
     <p class="lede">Program hangi antrenmanın planlandığını gösterir, burası hangisinin gerçekten yapıldığını gösterir. Bir kartın günlüğüne kayıt eklendiğinde burada da otomatik görünür.</p>
     <div id="weeks"></div>
   </main>
-  <script src="veri.js"></script>
+  <script src="gunlukverileri.js"></script>
   <script>
     const AYLAR=["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
     const AY_INDEX={};AYLAR.forEach((a,i)=>AY_INDEX[a]=i);
@@ -76,8 +77,19 @@
     const KISA={"Pazar":"Paz","Pazartesi":"Pzt","Salı":"Sal","Çarşamba":"Çar","Perşembe":"Per","Cuma":"Cum","Cumartesi":"Cmt"};
 
     function tarihiCoz(t){
+      if(/^\d{4}-\d{2}-\d{2}$/.test(t)){
+        const [yil,ay,gun]=t.split("-").map(Number);
+        return new Date(yil,ay-1,gun);
+      }
       const [gun,ay,yil]=t.split(" ");
       return new Date(Number(yil),AY_INDEX[ay],Number(gun));
+    }
+    function gunlukIcerigi(k){
+      const liste=(k.egzersizler||[]).length
+        ? `<ul>${k.egzersizler.map(e=>`<li>${e.ad}: ${e.agirlik}${e.setTekrar?`, ${e.setTekrar}`:""}</li>`).join("")}</ul>`
+        : "";
+      const not=k.aciklama?`<p>${k.aciklama}</p>`:"";
+      return liste+not;
     }
     function pazartesiBasi(d){
       const fark=(d.getDay()+6)%7;
@@ -90,7 +102,7 @@
 
     const kutu=document.getElementById("weeks");
     const kayitlar=(typeof GUNLUK!=="undefined"?GUNLUK:[])
-      .map(g=>({...g,_tarih:tarihiCoz(g.tarih)}))
+      .map(g=>({...g,_tarih:tarihiCoz(g.gun||g.tarih)}))
       .sort((a,b)=>b._tarih-a._tarih);
 
     if(!kayitlar.length){
@@ -123,7 +135,7 @@
               <span class="code ${yerTuru(k.kart)}">${k.kart}</span>
               <span class="sign">+</span>
             </summary>
-            <div class="day-body">${k.html}<a class="card-link" href="kart.html#${k.kart}">${k.kart} kartını aç →</a></div>
+            <div class="day-body">${gunlukIcerigi(k)}<a class="card-link" href="../kartlar/kart.html#${k.kart}">${k.kart} kartını aç →</a></div>
           </details>`;
         }).join("");
 

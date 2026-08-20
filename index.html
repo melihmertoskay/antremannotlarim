@@ -16,6 +16,7 @@
       --green-soft: #e2ece6;
       --rust-soft: #f1e4d8;
       --blue-soft: #e0ebef;
+      --purple-soft: #ebe5f1;
     }
 
     * { box-sizing: border-box; }
@@ -107,6 +108,7 @@
     .program { background: var(--rust-soft); }
     .workouts { background: var(--green-soft); border-color: rgba(40, 94, 73, .25); }
     .journal { background: var(--blue-soft); }
+    .exercises { background: var(--purple-soft); }
 
     h1 {
       margin: 0 0 8px;
@@ -146,36 +148,30 @@
 <body>
   <header class="topbar">
     <nav class="topbar-inner">
-      <a class="nav-link active" href="index.html">Ana Sayfa</a>
-      <a class="nav-link" href="program.html">Program</a>
-      <a class="nav-link" href="antrenman-kartlari.html">Kartlar</a>
-      <a class="nav-link" href="gunluk.html">Günlük</a>
+      <a class="nav-link  active" href="index.html">Ana Sayfa</a>
+      <a class="nav-link " href="program/">Program</a>
+      <a class="nav-link " href="gunluk/">Günlük</a>
+      <a class="nav-link " href="kartlar/">Kartlar</a>
+      <a class="nav-link " href="egzersizler/">Egzersizler</a>
     </nav>
   </header>
 
   <main>
     <section class="cards" aria-label="Antrenman notları bölümleri">
-      <a class="section-card program" href="program.html">
-        <span>
-          <h1>Program</h1>
-          <p>Gün gün hedeflenen antrenman kartları ve haftalık çalışma düzeni.</p>
-        </span>
+      <a class="section-card program" href="program/">
+        <span><h1>Program</h1><p>Gün gün hedeflenen antrenman kartları ve haftalık çalışma düzeni.</p></span>
         <span class="arrow" aria-hidden="true">→</span>
       </a>
-
-      <a class="section-card workouts" href="antrenman-kartlari.html">
-        <span>
-          <h1>Antrenman Kartları</h1>
-          <p>Salon, ev ve yüzme için hazırlanan 40 dakikalık antrenman kartları.</p>
-        </span>
+      <a class="section-card journal" href="gunluk/">
+        <span><h1>Günlük</h1><p>Yapılan antrenmanlar, kullanılan ağırlıklar ve antrenman notları.</p></span>
         <span class="arrow" aria-hidden="true">→</span>
       </a>
-
-      <a class="section-card journal" href="gunluk.html">
-        <span>
-          <h1>Günlük</h1>
-          <p>Yapılan antrenmanlar, kullanılan ağırlıklar ve antrenman notları.</p>
-        </span>
+      <a class="section-card workouts" href="kartlar/">
+        <span><h1>Antrenman Kartları</h1><p>Salon, ev ve yüzme için hazırlanan 40 dakikalık antrenman kartları.</p></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="section-card exercises" href="egzersizler/">
+        <span><h1>Egzersizler</h1><p>Hareket açıklamaları ve son kullanılan ağırlıklar.</p></span>
         <span class="arrow" aria-hidden="true">→</span>
       </a>
     </section>

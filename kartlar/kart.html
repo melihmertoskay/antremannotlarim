@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2ec">
+  <title>Antrenman Kartları</title>
+  <style>
+    :root{--bg:#f4f2ec;--card:#fffefa;--text:#22241f;--muted:#73766f;--line:#ddd9cf;--accent:#285e49;--soft:#e5eee9}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    button{font:inherit}.topbar{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(244,242,236,.96);backdrop-filter:blur(12px)}
+    .topbar-inner{display:flex;align-items:center;gap:4px;width:min(100% - 24px,860px);min-height:56px;margin:auto;overflow-x:auto;scrollbar-width:none}.topbar-inner::-webkit-scrollbar{display:none}
+    .nav-link{flex:0 0 auto;padding:8px 12px;border-radius:8px;color:var(--muted);font-size:.85rem;font-weight:700;white-space:nowrap;text-decoration:none}
+    .nav-link:hover{color:var(--text);background:#ebe8e0}
+    .nav-link.active{color:#285e49;background:#e5eee9}
+    main{width:min(100% - 24px,760px);margin:26px auto 60px}.card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:0 14px 42px rgba(45,48,41,.07)}
+    .card-header{display:flex;align-items:center;gap:15px;padding:22px 24px;border-bottom:1px solid var(--line)}.card-code{display:grid;flex:0 0 54px;width:54px;height:54px;place-items:center;border-radius:13px;background:var(--soft);color:var(--accent);font-size:1.1rem;font-weight:850}
+    h1{margin:0 0 4px;font-size:clamp(1.28rem,4vw,1.7rem);line-height:1.15}.card-meta{margin:0;color:var(--muted);font-size:.84rem}.table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;table-layout:fixed}th{padding:11px 12px;background:#f6f4ee;color:var(--muted);font-size:.69rem;letter-spacing:.06em;text-align:left;text-transform:uppercase}
+    td{padding:17px 12px;border-top:1px solid #ebe8e0;vertical-align:middle;font-size:.94rem}tbody tr:first-child td{border-top:0}
+    th:nth-child(1),td:nth-child(1){width:48px;color:var(--muted);text-align:center}th:nth-child(2),td:nth-child(2){width:92px}th:nth-child(4),td:nth-child(4){width:105px}
+    .time{color:var(--accent);font-size:.84rem;font-weight:800;white-space:nowrap}.exercise{font-weight:650}.target{font-weight:800;white-space:nowrap}
+    .card-extras{border-top:1px solid var(--line);padding:4px 20px 12px}.card-extras details{border-bottom:1px solid #ebe8e0}.card-extras details:last-child{border-bottom:0}
+    .card-extras > details > summary{padding:13px 2px;color:var(--accent);font-size:.86rem;font-weight:400;list-style:none;cursor:pointer}.card-extras > details > summary::-webkit-details-marker{display:none}.card-extras > details > summary::before{content:"+ ";}.card-extras > details[open] > summary::before{content:"− "}
+    .extra-content{padding:1px 2px 17px;color:#4d514b;font-size:.88rem;line-height:1.6}.extra-content p{margin:0 0 10px}.extra-content p:last-child{margin-bottom:0}.empty{color:var(--muted)}
+    .journal-list{display:grid}
+    .journal-entry{border-bottom:1px solid #ebe8e0}.journal-entry:last-child{border-bottom:0}
+    .journal-entry summary{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;color:var(--text);font-weight:400;list-style:none;cursor:pointer}
+    .journal-entry summary::-webkit-details-marker{display:none}
+    .journal-entry summary::after{content:"+";color:var(--accent);font-size:1.1rem;font-weight:500}
+    .journal-entry[open] summary::after{content:"−"}
+    .entry-body{padding:0 2px 15px}.entry-body ul{margin:0 0 10px;padding-left:19px}.entry-body li{margin:2px 0}.entry-body p{margin:0}
+    .archive-link{display:inline-block;margin:2px 2px 0;color:var(--accent);font-size:.8rem;font-weight:800}
+    .about-label{display:block;margin-bottom:2px;color:var(--text);font-weight:800}
+    .exercise-button{padding:0;border:0;border-bottom:1px dashed currentColor;background:none;color:inherit;font:inherit;font-weight:650;text-align:left;cursor:pointer}
+    .exercise-button:hover{color:var(--accent)}
+    .modal{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(24,27,23,.55)}
+    .modal.open{display:flex}.modal-box{width:min(100%,520px);max-height:min(82vh,680px);overflow:auto;border-radius:18px;background:var(--card);box-shadow:0 24px 80px rgba(0,0,0,.22)}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line)}
+    .modal-header h2{margin:0;font-size:1.2rem}.modal-close{display:grid;width:36px;height:36px;place-items:center;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--text);font-size:1.25rem;cursor:pointer}
+    .modal-body{padding:20px}.exercise-image{display:block;width:100%;height:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:12px;background:#faf8f1}.modal-section{margin-bottom:18px}.modal-section:last-child{margin-bottom:0}.modal-section h3{margin:0 0 5px;color:var(--accent);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}.modal-section p{margin:0;line-height:1.6}.coming-soon{margin:0;color:var(--muted)}
+    @media(max-width:560px){main{margin-top:20px}.card-header{padding:18px}th{padding:9px 7px;font-size:.62rem}td{padding:15px 7px;font-size:.86rem}th:nth-child(1),td:nth-child(1){width:34px}th:nth-child(2),td:nth-child(2){width:74px}th:nth-child(4),td:nth-child(4){width:79px}.time{font-size:.76rem}.target{white-space:normal}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="topbar-inner">
+      <a class="nav-link" href="../index.html">Ana Sayfa</a>
+      <a class="nav-link" href="../program/">Program</a>
+      <a class="nav-link" href="../gunluk/">Günlük</a>
+      <a class="nav-link active" href="../kartlar/">Kartlar</a>
+      <a class="nav-link" href="../egzersizler/">Egzersizler</a>
+    </nav>
+  </header>
+  <main><article class="card">
+    <header class="card-header"><div class="card-code" id="cardCode">S1</div><div><h1 id="cardTitle"></h1><p class="card-meta" id="cardMeta"></p></div></header>
+    <div class="table-wrap"><table><thead><tr><th>Sıra</th><th>Süre</th><th>Hareket</th><th>Tekrar</th></tr></thead><tbody id="workoutRows"></tbody></table></div>
+    <div class="card-extras">
+      <details id="journalDetails"><summary>Kart günlüğü</summary><div class="extra-content" id="journalContent"></div></details>
+      <details id="aboutDetails"><summary>Kart hakkında</summary><div class="extra-content" id="aboutContent"></div></details>
+    </div>
+  </article></main>
+  <div class="modal" id="exerciseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <header class="modal-header"><h2 id="modalTitle"></h2><button class="modal-close" id="modalClose" aria-label="Kapat">×</button></header>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+  <script src="../gunluk/gunlukverileri.js"></script>
+  <script src="../egzersizler/egzersizverileri.js"></script>
+  <script>
+    const exerciseDetails=typeof EGZERSIZLER!=="undefined"?EGZERSIZLER:{};
+    const workouts={
+      S1:{title:"Göğüs, Omuz ve Arka Kol",meta:"40 dakika · Set araları 60 saniye",color:["#285e49","#e5eee9"],rows:[
+        ["0–5 dk","Omuz ve kol ısınması","5 dk"],["5–13 dk","Dambıl bench press","3 × 10"],["13–20 dk","Dambıl lateral raise","3 × 10"],["20–28 dk","Incline dambıl press","3 × 10"],["28–35 dk","Oturarak dambıl shoulder press","3 × 10"],["35–40 dk","Tek dambılla overhead triceps extension","3 × 10"]]},
+      S2:{title:"Sırt, Arka Omuz ve Ön Kol",meta:"40 dakika · Set araları 60 saniye",color:["#285e49","#e5eee9"],rows:[
+        ["0–5 dk","Omuz ve sırt ısınması","5 dk"],["5–14 dk","Bench destekli tek kol dambıl row","3 × 10"],["14–21 dk","Dambıl reverse fly","3 × 10"],["21–28 dk","Bench üzerinde dambıl pullover","3 × 10"],["28–34 dk","Dambıl biceps curl","3 × 10"],["34–40 dk","Dambıl hammer curl","3 × 10"]]},
+      S3:{title:"Bacak, Kalça ve Baldır",meta:"40 dakika · Set araları 60 saniye",color:["#285e49","#e5eee9"],rows:[
+        ["0–5 dk","Squat ve bacak ısınması","5 dk"],["5–13 dk","Goblet squat","3 × 10"],["13–21 dk","Deadlift","3 × 5"],["21–29 dk","Bench üzerinde dambıllı hip thrust","3 × 10"],["29–36 dk","Bulgarian split squat","3 × 10"],["36–40 dk","Ayakta dambıllı calf raise","3 × 15"]]},
+      S4:{title:"Tam Vücut",meta:"40 dakika · Set araları 60 saniye",color:["#285e49","#e5eee9"],rows:[
+        ["0–5 dk","Genel ısınma","5 dk"],["5–12 dk","Goblet squat","3 × 10"],["12–19 dk","Dambıl bench press","3 × 10"],["19–27 dk","Bench destekli tek kol dambıl row","3 × 10"],["27–34 dk","Dambıl Romanian deadlift","3 × 10"],["34–40 dk","Oturarak dambıl shoulder press","3 × 10"]]},
+      E1:{title:"Ekipmansız Üst Vücut",meta:"40 dakika · Set araları 60 saniye",color:["#985a27","#f4e8dc"],rows:[
+        ["0–5 dk","Omuz ve kol ısınması","5 dk"],["5–13 dk","Normal şınav","3 × 10"],["13–21 dk","Pike şınavı","3 × 8"],["21–29 dk","Dar tutuş şınav","3 × 8"],["29–35 dk","Plank shoulder tap","3 × 10"],["35–40 dk","Side plank","3 × 30 sn"]]},
+      E2:{title:"Ekipmansız Bacak ve Kalça",meta:"40 dakika · Set araları 60 saniye",color:["#985a27","#f4e8dc"],rows:[
+        ["0–5 dk","Squat ve bacak ısınması","5 dk"],["5–13 dk","Bulgarian split squat","3 × 10"],["13–20 dk","Yavaş squat","3 × 15"],["20–28 dk","Tek bacak glute bridge","3 × 10"],["28–35 dk","Reverse lunge","3 × 10"],["35–40 dk","Tek bacak calf raise","3 × 15"]]},
+      E3:{title:"Evde Tam Vücut",meta:"40 dakika · Set araları 60 saniye",color:["#985a27","#f4e8dc"],rows:[
+        ["0–5 dk","Genel ısınma","5 dk"],["5–12 dk","Yavaş squat","3 × 15"],["12–19 dk","Normal şınav","3 × 10"],["19–26 dk","Bant ile oturarak row","3 × 12"],["26–32 dk","Reverse lunge","3 × 10"],["32–37 dk","Glute bridge","3 × 15"],["37–40 dk","Plank","2 × 30 sn"]]},
+      E4:{title:"Bantla Sırt ve Çekiş",meta:"40 dakika · Set araları 60 saniye",color:["#985a27","#f4e8dc"],rows:[
+        ["0–5 dk","Sırt ve omuz ısınması","5 dk"],["5–13 dk","Bant ile oturarak row","3 × 12"],["13–20 dk","Bant ile tek kol row","3 × 12"],["20–26 dk","Bant pull-apart","3 × 15"],["26–32 dk","Bant ile lat pullover","3 × 12"],["32–37 dk","Superman","3 × 12"],["37–40 dk","Bant ile biceps curl","2 × 12"]]},
+      Y1:{title:"Teknik ve Rahat Yüzme",meta:"40 dakika · Toplam 500 metre",color:["#286987","#e1eef3"],rows:[
+        ["0–5 dk","Kuru zeminde calf raise","3 × 15"],["5–8 dk","Ağırlıksız squat","3 × 10"],["8–10 dk","Havuza geçiş","2 dk"],["10–15 dk","Rahat yüzme","100 m"],["15–23 dk","Uzun kulaç ve kontrollü nefes","4 × 25 m"],["23–35 dk","Rahat ve kesintisiz yüzme","250 m"],["35–40 dk","Çok rahat yüzme","50 m"]]},
+      Y2:{title:"Kısa Aralıklı Yüzme",meta:"40 dakika · Toplam 450 metre",color:["#286987","#e1eef3"],rows:[
+        ["0–5 dk","Kuru zeminde calf raise","3 × 15"],["5–8 dk","Plank","3 × 30 sn"],["8–10 dk","Havuza geçiş","2 dk"],["10–15 dk","Rahat yüzme","100 m"],["15–29 dk","Tempolu yüzme, her tekrarda 30 sn ara","8 × 25 m"],["29–35 dk","Bir rahat, bir orta tempo","4 × 25 m"],["35–40 dk","Çok rahat yüzme","50 m"]]},
+      Y3:{title:"Kesintisiz Yüzme",meta:"40 dakika · Toplam 550 metre",color:["#286987","#e1eef3"],rows:[
+        ["0–5 dk","Kuru zeminde calf raise","3 × 15"],["5–8 dk","Reverse lunge","2 × 10"],["8–10 dk","Havuza geçiş","2 dk"],["10–15 dk","Rahat yüzme","100 m"],["15–30 dk","Rahat-orta tempoda kesintisiz yüzme","300 m"],["30–36 dk","Her 25 metrenin ikinci yarısında hızlan","4 × 25 m"],["36–40 dk","Çok rahat yüzme","50 m"]]}
+    };
+    const cardInfo={
+      S1:{
+        aim:"Göğüs, ön omuz ve arka kol kaslarını geliştiren üst vücut itiş antrenmanıdır.",
+        when:"Göğüs ve omuzların dinlenmişse; son bir-iki günde ağır bir itiş antrenmanı veya yorucu yüzme yapmadıysan seçilebilir."
+      },
+      S2:{aim:"Sırt, arka omuz ve ön kol kaslarını geliştirir. İtiş ağırlıklı çalışmaları dengelemeye yardımcı olur.",when:"Sırt ve kolların dinlenmişse veya son antrenmanların daha çok göğüs ve bacak odaklıysa seçilebilir."},
+      S3:{aim:"Bacak, kalça, arka bacak ve baldır kaslarını birlikte çalıştırır; deadlift dışında tamamen dambılla yapılır.",when:"Bacakların dinlenmişse ve son antrenmanın üst vücut ya da yüzme ağırlıklıysa seçilebilir. Deadlift için bir barbell gerekir — dambılla aynı ağırlıkta ve güvenlikte yapılamayacak tek harekettir."},
+      S4:{aim:"Tek antrenmanda göğüs, sırt, omuz, bacak ve kalçayı çalıştıran dengeli bir tam vücut kartıdır.",when:"Bir süredir antrenman yapmadıysan, o hafta az gün ayırabileceksen veya belirli bir kas grubu özellikle yorgun değilse seçilebilir."},
+      E1:{aim:"Ekipman olmadan göğüs, omuz, arka kol ve core bölgesini çalıştırır.",when:"Evde üst vücut çalışmak istediğinde kullanılabilir. İtiş ağırlıklı bir karttır; çekiş tarafı için E4 veya S2 ile dengelenmelidir."},
+      E2:{aim:"Ekipman olmadan bacak, kalça ve baldır kaslarını çalıştırır.",when:"Evde bacak çalışmak istediğinde ve bacakların önceki antrenmandan dinlenmiş olduğunda seçilebilir."},
+      E3:{aim:"Evde bütün vücudu tek antrenmanda çalıştırır: squat, itiş, çekiş, kalça ve core. Haftada az gün çalışıldığında tercih edilecek karttır.",when:"Salona gidemediğin, dengeli tek bir antrenman yapmak istediğin günler için uygundur. Row hareketi için bir direnç bandı gerekir."},
+      E4:{aim:"Evde bir direnç bandıyla sırt, arka omuz ve ön kol kaslarını çalıştırır; itiş ağırlıklı ev kartlarını dengeleyen çekiş antrenmanıdır.",when:"Evde çekiş çalışmak istediğinde seçilebilir. Bir direnç bandı gerekir. Bant kalınlığını, son tekrarlarda zorlanacağın kadar direnç verecek şekilde seç; zamanla daha kalın banda geç."},
+      Y1:{aim:"Yüzme tekniğini, rahat nefes kontrolünü ve düşük-orta yoğunlukta dayanıklılığı geliştirir.",when:"Yüzmeye dönüş gününde, daha hafif çalışmak istediğinde veya yoğun bir kuvvet antrenmanından sonra seçilebilir."},
+      Y2:{aim:"Kısa tempolu tekrarlarla yüzme kondisyonunu ve hızlanma kapasitesini geliştirir.",when:"Kendini dinlenmiş hissettiğin ve daha yoğun bir yüzme çalışması yapmak istediğin gün seçilebilir."},
+      Y3:{aim:"Kesintisiz yüzme süresini ve temel aerobik dayanıklılığı artırmayı amaçlar.",when:"Yüksek hızdan çok istikrarlı tempo çalışmak istediğinde ve omuzların yorgun olmadığında seçilebilir."}
+    };
+    const rows=document.getElementById("workoutRows"),journalContent=document.getElementById("journalContent"),aboutContent=document.getElementById("aboutContent"),journalDetails=document.getElementById("journalDetails"),aboutDetails=document.getElementById("aboutDetails");
+    function gunlukIcerigi(k){
+      const liste=(k.egzersizler||[]).length
+        ? `<ul>${k.egzersizler.map(e=>`<li>${e.ad}: ${e.agirlik}${e.setTekrar?`, ${e.setTekrar}`:""}</li>`).join("")}</ul>`
+        : "";
+      const not=k.aciklama?`<p>${k.aciklama}</p>`:"";
+      return liste+not;
+    }
+    function showCard(code){
+      const w=workouts[code];
+      document.documentElement.style.setProperty("--accent",w.color[0]);document.documentElement.style.setProperty("--soft",w.color[1]);
+      document.getElementById("cardCode").textContent=code;document.getElementById("cardTitle").textContent=w.title;document.getElementById("cardMeta").textContent=w.meta;document.title=code+" · "+w.title;
+      rows.innerHTML=w.rows.map((r,i)=>`<tr><td>${i+1}</td><td class="time">${r[0]}</td><td class="exercise"><button class="exercise-button" data-exercise="${r[1]}">${r[1]}</button></td><td class="target">${r[2]}</td></tr>`).join("");
+      const info=cardInfo[code];
+      const kayitlar=(typeof GUNLUK!=="undefined"?GUNLUK:[])
+        .filter(g=>g.kart===code)
+        .sort((a,b)=>(b.gun||b.tarih).localeCompare(a.gun||a.tarih));
+      journalContent.innerHTML=kayitlar.length
+        ? `<div class="journal-list">${kayitlar.map(e=>`<details class="journal-entry"><summary>${e.tarih}</summary><div class="entry-body">${gunlukIcerigi(e)}</div></details>`).join("")}</div><a class="archive-link" href="../gunluk/">Tüm günlüğü gör →</a>`
+        : '<p class="empty">Bu kart için henüz günlük kaydı yok.</p>';
+      aboutContent.innerHTML=`<p><span class="about-label">Amaç</span>${info.aim}</p><p><span class="about-label">Ne zaman seçilmeli?</span>${info.when}</p>`;journalDetails.open=false;aboutDetails.open=false;
+    }
+    const modal=document.getElementById("exerciseModal"),modalTitle=document.getElementById("modalTitle"),modalBody=document.getElementById("modalBody"),modalClose=document.getElementById("modalClose");
+    function openExercise(name){
+      const detail=exerciseDetails[name];modalTitle.textContent=name;
+      const image=typeof EGZERSIZ_GORSELLERI!=="undefined"?EGZERSIZ_GORSELLERI[name]:null;
+      modalBody.innerHTML=detail
+        ? `${image?`<img class="exercise-image" src="${image}" alt="${name} hareketini ve çalışan kasları gösteren görsel">`:""}<section class="modal-section"><h3>Nasıl yapılır?</h3><p>${detail.application}</p></section><section class="modal-section"><h3>Dikkat</h3><p>${detail.attention}</p></section><section class="modal-section"><h3>Çalışan kaslar</h3><p>${detail.muscles}</p></section><section class="modal-section"><h3>Daha kolay</h3><p>${detail.easier}</p></section>`
+        : '<p class="coming-soon">Bu hareketin açıklaması hazırlanacak.</p>';
+      modal.classList.add("open");modalClose.focus();
+    }
+    function closeModal(){modal.classList.remove("open")}
+    document.addEventListener("click",e=>{const button=e.target.closest(".exercise-button");if(button)openExercise(button.dataset.exercise)});
+    modalClose.addEventListener("click",closeModal);modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+    const requestedCode=location.hash.slice(1).toUpperCase();
+    showCard(workouts[requestedCode]?requestedCode:"S1");
+  </script>
+</body>
+</html>

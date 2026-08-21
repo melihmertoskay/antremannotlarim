@@ -11,8 +11,9 @@ index.html                         Ana sayfa
 01-program/index.html              Program sayfası
 02-gunluk/index.html               Günlük arayüzü
 02-gunluk/gunlukverileri.js        Günlük veri modeli ve kayıt işlevleri
-03-kartlar/index.html              Tüm antrenman kartlarının listesi
-03-kartlar/kart.html               Tek kart görünümü ve hareket popup'ı
+03-antrenmanlar/index.html         Tüm antrenman kartlarının listesi
+03-antrenmanlar/antrenman.html     Tek antrenman kartı görünümü
+03-antrenmanlar/antrenman-penceresi.js Antrenman popup'ı ve geri tuşu davranışı
 04-egzersizler/index.html          Kodlu egzersiz listesi ve popup'lar
 04-egzersizler/egzersizverileri.js Egzersiz açıklamaları ve görseller
 04-egzersizler/kodlar.js           Egzersiz kodları
@@ -24,7 +25,7 @@ Klasörlerin başındaki sayılar, bölümlerin ana sayfadaki sırasını ve dos
 
 - **Program:** Hangi gün hangi antrenman kartının hedeflendiğini gösterir.
 - **Günlük:** Gerçekte yapılan egzersizleri gösterir. Yeni kayıt eklenebilir; mevcut kayıt düzenlenebilir veya silinebilir. Bir güne tıklanınca o günün bütün kayıtları açılır.
-- **Kartlar:** Salon, ekipmansız ve yüzme kartlarını listeler. Bir kart açıldığında hareket sırası, kart günlüğü ve kart hakkındaki bilgi görülür. Hareket adına tıklanınca açıklama popup'ı açılır.
+- **Antrenmanlar:** Salon, ekipmansız ve yüzme antrenman kartlarını listeler. Bir antrenman açıldığında hareket sırası, antrenman günlüğü ve antrenman hakkındaki bilgi görülür. Hareket adına tıklanınca egzersiz kartı açılır.
 - **Egzersizler:** Hareketleri kas bölgesine göre kodlu listeler. Örneğin `B1 - Ayakta dambıllı calf raise`. Harekete tıklanınca yapılışı, çalışan kaslar, uyarılar ve o harekete ait günlük kayıtları açılır.
 
 ## HTML ve JavaScript nedir?
@@ -39,7 +40,7 @@ Her günlük satırı en az şu alanları taşır:
 {
   id: "benzersiz-kayit-kodu",
   gun: "2026-08-19",
-  kart: "S1",
+  antrenman: "S1",
   egzersiz: "Dambıl bench press",
   agirlik: "10 kg",
   setTekrar: "3 × 10",
@@ -50,7 +51,7 @@ Her günlük satırı en az şu alanları taşır:
 `02-gunluk/gunlukverileri.js` aynı kayıtları üç yerde kullanılabilir hale getirir:
 
 1. Günlük sayfası kayıtları tarihe göre gruplar.
-2. Kart sayfası kayıtları `kart` alanına göre süzer.
+2. Antrenman sayfası kayıtları `antrenman` alanına göre süzer.
 3. Egzersiz sayfası kayıtları `egzersiz` alanına göre süzer.
 
 Bu nedenle Günlük sayfasından eklenen tek bir kayıt, ilgili kartın günlüğünde ve ilgili egzersizin popup'ında da görünür.
@@ -92,7 +93,7 @@ Sayfa yapısı, klasörler, veri modeli veya kayıt akışı her değiştiğinde
 
 ## S3 egzersiz görselleri
 
-S3 kartındaki altı hareket için başlangıç ve bitiş pozisyonlarını, hareket yönünü ve çalışan kas bölgelerini gösteren görseller eklenmiştir. Görsel dosyaları egzersiz adlarıyla eşleştirilir; hem antrenman kartındaki hareket popup'ında hem Egzersizler sayfasındaki popup'ta görünür.
+S3 antrenman kartındaki altı hareket için başlangıç ve bitiş pozisyonlarını, hareket yönünü ve çalışan kas bölgelerini gösteren görseller eklenmiştir. Görsel dosyaları egzersiz adlarıyla eşleştirilir; hem antrenman kartındaki hareket popup'ında hem Egzersizler sayfasındaki popup'ta görünür.
 
 
 ## Son veri güncellemesi
@@ -101,3 +102,20 @@ S3 kartındaki altı hareket için başlangıç ve bitiş pozisyonlarını, hare
 
 
 19 Ağustos 2026 tarihli S1 antrenmanına Incline dambıl press (10 kg, 3 × 10) kaydı sonradan eklenmiştir.
+
+
+## Temel kavramlar
+
+Sitede beş ana sayfa bulunur: Ana Sayfa, Program, Günlük, Antrenmanlar ve Egzersizler. Ana sayfa yalnızca bu bölümlere yönlendirir.
+
+- **Antrenman kartı:** Birkaç egzersizin birleşmesiyle oluşan yaklaşık 40 dakikalık çalışma planıdır. S1, E2 ve Y1 gibi kodlar antrenmanları belirtir.
+- **Egzersiz kartı:** Tek bir hareketin nasıl yapılacağını, çalışan kasları, dikkat noktalarını, görselini ve geçmiş yük kayıtlarını gösteren popup'tır.
+- **Günlük kaydı:** Tarih, antrenman, egzersiz, kullanılan yük, set/tekrar ve isteğe bağlı not alanlarından oluşur.
+
+Günlük kayıtlarındaki eski `kart` alanı `antrenman` alanına taşınmıştır. Tarayıcıdaki eski kayıtlar okunurken otomatik dönüştürülür ve kaybolmaz.
+
+## Popup davranışı
+
+Program ve Antrenmanlar sayfasındaki bir antrenmana basıldığında antrenman kartı popup olarak açılır. Popup açıkken tarayıcının veya telefonun geri tuşu önce popup'ı kapatır. Antrenman içindeki bir egzersize basıldığında egzersiz açıklaması aynı antrenman alanının üzerinde açılır; geri tuşu önce egzersiz açıklamasını, ardından antrenman popup'ını kapatır.
+
+Program sayfasında bugünün antrenman düğmesi antrenman türünün rengiyle gösterilir. Alternatif antrenmanlar nötr gri kalır.

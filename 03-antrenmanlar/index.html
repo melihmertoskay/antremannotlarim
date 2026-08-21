@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f4f2ec">
-  <title>Antrenman Kartları</title>
+  <title>Antrenmanlar</title>
   <style>
     :root{--bg:#f4f2ec;--card:#fffefa;--text:#22241f;--muted:#73766f;--line:#ddd9cf;--accent:#285e49}
     *{box-sizing:border-box}
@@ -40,39 +40,41 @@
       <a class="nav-link" href="../index.html">Ana Sayfa</a>
       <a class="nav-link" href="../01-program/">Program</a>
       <a class="nav-link" href="../02-gunluk/">Günlük</a>
-      <a class="nav-link active" href="../03-kartlar/">Kartlar</a>
+      <a class="nav-link active" href="../03-antrenmanlar/">Antrenmanlar</a>
       <a class="nav-link" href="../04-egzersizler/">Egzersizler</a>
     </nav>
   </header>
   <main>
-    <section class="groups" aria-label="Antrenman kartı kategorileri">
+    <section class="groups" aria-label="Antrenman kategorileri">
       <details>
-        <summary>Salon Kartları</summary>
+        <summary>Salon Antrenmanları</summary>
         <div class="card-list">
-          <a class="card-link" href="kart.html#S1"><span class="code">S1</span><span class="name">Göğüs, omuz ve arka kol</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#S2"><span class="code">S2</span><span class="name">Sırt, arka omuz ve ön kol</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#S3"><span class="code">S3</span><span class="name">Bacak, kalça ve baldır</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#S4"><span class="code">S4</span><span class="name">Tam vücut</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="S1" href="antrenman.html#S1"><span class="code">S1</span><span class="name">Göğüs, omuz ve arka kol</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="S2" href="antrenman.html#S2"><span class="code">S2</span><span class="name">Sırt, arka omuz ve ön kol</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="S3" href="antrenman.html#S3"><span class="code">S3</span><span class="name">Bacak, kalça ve baldır</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="S4" href="antrenman.html#S4"><span class="code">S4</span><span class="name">Tam vücut</span><span class="arrow">→</span></a>
         </div>
       </details>
       <details>
-        <summary>Ev Kartları</summary>
+        <summary>Ekipmansız Antrenmanlar</summary>
         <div class="card-list">
-          <a class="card-link" href="kart.html#E1"><span class="code">E1</span><span class="name">Ekipmansız üst vücut</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#E2"><span class="code">E2</span><span class="name">Ekipmansız bacak ve kalça</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#E3"><span class="code">E3</span><span class="name">Evde tam vücut</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#E4"><span class="code">E4</span><span class="name">Bantla sırt ve çekiş</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="E1" href="antrenman.html#E1"><span class="code">E1</span><span class="name">Ekipmansız üst vücut</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="E2" href="antrenman.html#E2"><span class="code">E2</span><span class="name">Ekipmansız bacak ve kalça</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="E3" href="antrenman.html#E3"><span class="code">E3</span><span class="name">Evde tam vücut</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="E4" href="antrenman.html#E4"><span class="code">E4</span><span class="name">Bantla sırt ve çekiş</span><span class="arrow">→</span></a>
         </div>
       </details>
       <details>
-        <summary>Yüzme Kartları</summary>
+        <summary>Yüzme Antrenmanları</summary>
         <div class="card-list">
-          <a class="card-link" href="kart.html#Y1"><span class="code">Y1</span><span class="name">Teknik ve rahat yüzme</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#Y2"><span class="code">Y2</span><span class="name">Kısa aralıklı yüzme</span><span class="arrow">→</span></a>
-          <a class="card-link" href="kart.html#Y3"><span class="code">Y3</span><span class="name">Kesintisiz yüzme</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="Y1" href="antrenman.html#Y1"><span class="code">Y1</span><span class="name">Teknik ve rahat yüzme</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="Y2" href="antrenman.html#Y2"><span class="code">Y2</span><span class="name">Kısa aralıklı yüzme</span><span class="arrow">→</span></a>
+          <a class="card-link" data-antrenman="Y3" href="antrenman.html#Y3"><span class="code">Y3</span><span class="name">Kesintisiz yüzme</span><span class="arrow">→</span></a>
         </div>
       </details>
     </section>
   </main>
+  <script src="antrenman-penceresi.js"></script>
+  <script>AntrenmanPenceresi.baslat({yol:"antrenman.html"});</script>
 </body>
 </html>

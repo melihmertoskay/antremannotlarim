@@ -54,7 +54,11 @@
     .alt-item:not(:last-child){border-bottom:1px solid #ebe8e0}
     .alt-item.primary span:first-child{color:var(--text);font-weight:700}
     .alt-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;padding:4px 9px;border-radius:7px;background:#eeece4;color:var(--text);font-size:.73rem;font-weight:800}
-    .alt-chip:hover{background:var(--accent);color:#fff}
+    .alt-chip:hover{background:#ddd9cf;color:var(--text)}
+    .alt-chip.today.salon{background:#e5eee9;color:var(--salon)}
+    .alt-chip.today.ev{background:#f4e8dc;color:var(--ev)}
+    .alt-chip.today.yuzme{background:#e1eef3;color:var(--yuzme)}
+    .alt-chip.today:hover{filter:brightness(.96)}
     @media(max-width:470px){
       main{margin-top:18px}
       .day-row{grid-template-columns:max-content max-content 1fr 30px;gap:6px;padding:9px 12px}
@@ -70,7 +74,7 @@
       <a class="nav-link" href="../index.html">Ana Sayfa</a>
       <a class="nav-link active" href="../01-program/">Program</a>
       <a class="nav-link" href="../02-gunluk/">Günlük</a>
-      <a class="nav-link" href="../03-kartlar/">Kartlar</a>
+      <a class="nav-link" href="../03-antrenmanlar/">Antrenmanlar</a>
       <a class="nav-link" href="../04-egzersizler/">Egzersizler</a>
     </nav>
   </header>
@@ -83,7 +87,7 @@
     const GUNLER=["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
     const KISA={"Pazar":"Paz","Pazartesi":"Pzt","Salı":"Sal","Çarşamba":"Çar","Perşembe":"Per","Cuma":"Cum","Cumartesi":"Cmt"};
 
-    const kartlar={
+    const antrenmanlar={
       S1:{
         not:`<p>Salonda itiş günü. Günlükte 16 Ağustos'ta kaydettiğin ağırlıklardan devam et.</p>
           <ul>
@@ -225,19 +229,20 @@
       const haftaEtiketi=`${pazartesi.getDate()} ${AYLAR[pazartesi.getMonth()]} haftası`;
 
       const satirlar=gunler.map(({tur,kod,tarih})=>{
-        const k=kartlar[kod];
+        const k=antrenmanlar[kod];
         const yer=kod.startsWith("S")?"salon":(kod.startsWith("E")?"ev":"yuzme");
         const adi=GUNLER[tarih.getDay()];
-        const baslik=KART_ADI[kod]||kod;
+        const baslik=ANTRENMAN_ADI[kod]||kod;
         const ek=(tur==="ev"||tur==="yuzme")&&hi>=2?`<p class="progress">${ILERLEME}</p>`:"";
-        const tumKartlar=[{kod,metin:"Bugünün kartı.",ana:true},...k.alt];
-        const kartlarHtml=tumKartlar.map(a=>{
-          const chip=a.kod?`<a class="alt-chip" href="../03-kartlar/kart.html#${a.kod}">${a.kod} →</a>`:"";
+        const tumAntrenmanlar=[{kod,metin:"Bugünün antrenmanı.",ana:true},...k.alt];
+        const antrenmanlarHtml=tumAntrenmanlar.map(a=>{
+          const chipTuru=a.kod?(a.kod.startsWith("S")?"salon":(a.kod.startsWith("E")?"ev":"yuzme")):"";
+          const chip=a.kod?`<a class="alt-chip${a.ana?" today "+chipTuru:""}" href="../03-antrenmanlar/antrenman.html#${a.kod}" data-antrenman="${a.kod}">${a.kod} →</a>`:"";
           return `<div class="alt-item${a.ana?" primary":""}"><span>${a.metin}</span>${chip}</div>`;
         }).join("");
         return `<div class="day">
           <div class="day-row">
-            <a class="day-link" href="../03-kartlar/kart.html#${kod}">
+            <a class="day-link" href="../03-antrenmanlar/antrenman.html#${kod}" data-antrenman="${kod}">
               <span class="date">${tarih.getDate()} ${AYLAR[tarih.getMonth()]}</span>
               <span class="wd"><span class="wd-long">${adi}</span><span class="wd-short">${KISA[adi]}</span></span>
               <span class="title-cell">
@@ -249,7 +254,7 @@
             <button class="toggle" type="button" aria-expanded="false" aria-label="Detayları göster">+</button>
           </div>
           <div class="day-body">${k.not}${ek}
-            <div class="alt"><span class="alt-label">Antrenman Kartları</span><div class="alt-list">${kartlarHtml}</div></div>
+            <div class="alt"><span class="alt-label">Antrenman seçenekleri</span><div class="alt-list">${antrenmanlarHtml}</div></div>
           </div>
         </div>`;
       }).join("");
@@ -270,5 +275,7 @@
       btn.setAttribute("aria-expanded",acik?"true":"false");
     });
   </script>
+  <script src="../03-antrenmanlar/antrenman-penceresi.js"></script>
+  <script>AntrenmanPenceresi.baslat({yol:"../03-antrenmanlar/antrenman.html"});</script>
 </body>
 </html>

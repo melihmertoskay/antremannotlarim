@@ -93,3 +93,8 @@ Sayfa yapısı, klasörler, veri modeli veya kayıt akışı her değiştiğinde
 ## S3 egzersiz görselleri
 
 S3 kartındaki altı hareket için başlangıç ve bitiş pozisyonlarını, hareket yönünü ve çalışan kas bölgelerini gösteren görseller eklenmiştir. Görsel dosyaları egzersiz adlarıyla eşleştirilir; hem antrenman kartındaki hareket popup'ında hem Egzersizler sayfasındaki popup'ta görünür.
+
+
+## Son veri güncellemesi
+
+21 Ağustos 2026 tarihli S3 antrenmanı dört egzersiz kaydıyla başlangıç verilerine eklenmiştir. Başlangıç verisi sürümleme mekanizması, yayımlanan yeni kayıtları tarayıcıdaki mevcut kişisel kayıtları silmeden birleştirir.

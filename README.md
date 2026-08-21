@@ -98,3 +98,6 @@ S3 kartındaki altı hareket için başlangıç ve bitiş pozisyonlarını, hare
 ## Son veri güncellemesi
 
 21 Ağustos 2026 tarihli S3 antrenmanı dört egzersiz kaydıyla başlangıç verilerine eklenmiştir. Başlangıç verisi sürümleme mekanizması, yayımlanan yeni kayıtları tarayıcıdaki mevcut kişisel kayıtları silmeden birleştirir.
+
+
+19 Ağustos 2026 tarihli S1 antrenmanına Incline dambıl press (10 kg, 3 × 10) kaydı sonradan eklenmiştir.

@@ -79,7 +79,7 @@ Başlangıç kayıtları `GUNLUK_BASLANGIC` dizisindedir. Kalıcı olarak herkes
 - `K`: Karın ve merkez bölge
 - `Y`: Yüzme
 
-Kodların eşlemesi `04-egzersizler/kodlar.js` dosyasındadır. Açıklamalar ve varsa gömülü görseller `egzersizverileri.js` içindedir.
+Kodların eşlemesi `04-egzersizler/kodlar.js` dosyasındadır. Açıklamalar ve görsel eşlemeleri `egzersizverileri.js` içindedir. Egzersiz görselleri `04-egzersizler/gorseller/` klasöründe ayrı PNG dosyaları olarak tutulur. Aynı egzersiz farklı antrenman kartlarında yer aldığında tek görsel eşlemesini paylaşır.
 
 ## Yayınlama
 
@@ -88,3 +88,8 @@ Site `main` dalından GitHub Pages ile yayınlanır. Repoya gönderilen değişi
 ## Bakım kuralı
 
 Sayfa yapısı, klasörler, veri modeli veya kayıt akışı her değiştiğinde bu README aynı değişiklikle birlikte güncellenmelidir.
+
+
+## S3 egzersiz görselleri
+
+S3 kartındaki altı hareket için başlangıç ve bitiş pozisyonlarını, hareket yönünü ve çalışan kas bölgelerini gösteren görseller eklenmiştir. Görsel dosyaları egzersiz adlarıyla eşleştirilir; hem antrenman kartındaki hareket popup'ında hem Egzersizler sayfasındaki popup'ta görünür.

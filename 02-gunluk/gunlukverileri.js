@@ -1,4 +1,10 @@
-const ANTRENMAN_ADI={S1:"Göğüs, Omuz ve Arka Kol",S2:"Sırt, Arka Omuz ve Ön Kol",S3:"Bacak ve Kalça",E1:"Üst Vücut",E2:"Alt Vücut",E3:"Tüm Vücut",Y1:"Teknik ve Rahat Tempo",Y2:"Tempo ve Kondisyon",Y3:"Kesintisiz Yüzme"};
+// Tek kaynak: antrenman kartı isimleri burada tanımlanır. 03-antrenmanlar/antrenman.html
+// kendi workouts objesindeki title alanlarını buradan okur, aynı isim iki yerde tutulmaz.
+const ANTRENMAN_ADI={S1:"Göğüs, Omuz ve Arka Kol",S2:"Sırt, Arka Omuz ve Ön Kol",S3:"Bacak, Kalça ve Baldır",S4:"Tam Vücut",E1:"Ekipmansız Üst Vücut",E2:"Ekipmansız Bacak ve Kalça",E3:"Evde Tam Vücut",E4:"Bantla Sırt ve Çekiş",Y1:"Teknik ve Rahat Yüzme",Y2:"Kısa Aralıklı Yüzme",Y3:"Kesintisiz Yüzme"};
+
+// Basit HTML kaçış yardımcısı — Günlük, Antrenmanlar ve Egzersizler sayfaları
+// kullanıcı girdisini (ağırlık, not, egzersiz adı vb.) DOM'a yazarken bunu kullanır.
+function gunlukKacis(deger=""){const d=document.createElement("div");d.textContent=deger;return d.innerHTML}
 
 const GUNLUK_BASLANGIC=[
   {id:"ornek-s1-1",gun:"2026-08-19",antrenman:"S1",egzersiz:"Dambıl bench press",agirlik:"10 kg",setTekrar:"3 × 10",aciklama:""},

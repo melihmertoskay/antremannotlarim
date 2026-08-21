@@ -14,10 +14,15 @@
     document.body.insertAdjacentHTML("beforeend",'<div class="antrenman-modal" id="antrenmanModal" role="dialog" aria-modal="true" aria-label="Antrenman kartı"><div class="antrenman-modal-box"><button class="antrenman-modal-close" type="button" aria-label="Antrenmanı kapat">×</button><iframe class="antrenman-modal-frame" title="Antrenman kartı"></iframe></div></div>');
     const modal=document.getElementById("antrenmanModal"),frame=modal.querySelector("iframe"),closeButton=modal.querySelector(".antrenman-modal-close");
     let acik=false;
-    function gercektenKapat(){if(!acik)return;acik=false;modal.classList.remove("open");document.body.classList.remove("antrenman-modal-acik");frame.src="about:blank"}
+    // iframe.src ile normal gezinme, tarayıcının "ortak geçmişine" kendi kaydını ekler; bu da
+    // popup'ı açmak için attığımız history.pushState ile çakışıp bazı tarayıcılarda (özellikle
+    // mobil Chrome) tek geri tuşuna iki adım gibi davranmasına yol açar. location.replace() aynı
+    // içeriği yükler ama geçmişe kayıt eklemez, tek "geri" adımı garanti olur.
+    function iframeYukle(url){try{frame.contentWindow.location.replace(url)}catch(hata){frame.src=url}}
+    function gercektenKapat(){if(!acik)return;acik=false;modal.classList.remove("open");document.body.classList.remove("antrenman-modal-acik");iframeYukle("about:blank")}
     function ac(kod){
       if(!kod)return;
-      frame.src=yol+"?gomulu=1#"+encodeURIComponent(kod);
+      iframeYukle(yol+"?gomulu=1#"+encodeURIComponent(kod));
       modal.classList.add("open");document.body.classList.add("antrenman-modal-acik");acik=true;
       history.pushState({antrenmanPenceresi:true,kod},"",location.pathname+location.search+"#antrenman="+encodeURIComponent(kod));
       closeButton.focus();

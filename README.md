@@ -1,121 +1,77 @@
 # Antrenman Notlarım
 
-Kişisel antrenman programını, antrenman kartlarını, egzersiz açıklamalarını ve geçmiş günlük kayıtlarını tek yerde tutan sade bir GitHub Pages sitesidir.
+Kişisel antrenman programını, 40 dakikalık antrenman kartlarını, egzersiz açıklamalarını ve günlük kayıtlarını bir arada tutan sade bir GitHub Pages sitesidir.
 
 Canlı site: https://melihmertoskay.github.io/antrenman-notlarim/
+
+## Bölümler
+
+- **Ana Sayfa:** Diğer dört bölüme yönlendirir.
+- **Program:** Günlere göre hedeflenen antrenmanları gösterir.
+- **Günlük:** Yapılan egzersizlerin tarih, antrenman, yük, set/tekrar ve not kayıtlarını listeler; kayıt ekleme, düzenleme ve silme arayüzünü içerir.
+- **Antrenmanlar:** Salon, ekipmansız ve yüzme antrenman kartlarını listeler.
+- **Egzersizler:** Kodlu egzersiz kartlarını; yapılış, çalışan kaslar, dikkat noktaları, görsel ve geçmiş yük bilgisiyle gösterir.
 
 ## Dosya düzeni
 
 ```text
-index.html                         Ana sayfa
-01-program/index.html              Program sayfası
-02-gunluk/index.html               Günlük arayüzü
-02-gunluk/gunlukverileri.js        Günlük veri modeli ve kayıt işlevleri
-03-antrenmanlar/index.html         Tüm antrenman kartlarının listesi
-03-antrenmanlar/antrenman.html     Tek antrenman kartı görünümü
-03-antrenmanlar/antrenman-penceresi.js Antrenman popup'ı ve geri tuşu davranışı
-04-egzersizler/index.html          Kodlu egzersiz listesi ve popup'lar
-04-egzersizler/egzersizverileri.js Egzersiz açıklamaları ve görseller
-04-egzersizler/kodlar.js           Egzersiz kodları
+index.html                              Ana sayfa
+01-program/index.html                   Program
+02-gunluk/index.html                    Günlük arayüzü
+02-gunluk/gunlukverileri.js             Günlük veri modeli
+03-antrenmanlar/index.html              Antrenman listesi
+03-antrenmanlar/antrenman.html          Antrenman kartı
+03-antrenmanlar/antrenman-penceresi.js  Ortak antrenman popup'ı
+04-egzersizler/index.html               Egzersiz listesi ve kartları
+04-egzersizler/egzersizverileri.js      Egzersiz açıklamaları ve görsel eşlemeleri
+04-egzersizler/kodlar.js                Egzersiz kodları ve eski ad eşlemeleri
+04-egzersizler/gorseller/                Egzersiz görselleri
 ```
 
-Klasörlerin başındaki sayılar, bölümlerin ana sayfadaki sırasını ve dosya listesindeki düzenini gösterir.
+## Temel kavramlar
 
-## Sayfalar nasıl çalışır?
+- **Antrenman kartı:** Birkaç egzersizin birleşmesiyle oluşan yaklaşık 40 dakikalık çalışma.
+- **Egzersiz kartı:** Tek bir hareketin açıklamasını, görselini ve geçmiş kayıtlarını gösteren popup.
+- **Günlük kaydı:** Tarih, antrenman, egzersiz, kullanılan yük, set/tekrar ve isteğe bağlı nottan oluşan veri.
 
-- **Program:** Hangi gün hangi antrenman kartının hedeflendiğini gösterir.
-- **Günlük:** Gerçekte yapılan egzersizleri gösterir. Yeni kayıt eklenebilir; mevcut kayıt düzenlenebilir veya silinebilir. Bir güne tıklanınca o günün bütün kayıtları açılır.
-- **Antrenmanlar:** Salon, ekipmansız ve yüzme antrenman kartlarını listeler. Bir antrenman açıldığında hareket sırası, antrenman günlüğü ve antrenman hakkındaki bilgi görülür. Hareket adına tıklanınca egzersiz kartı açılır.
-- **Egzersizler:** Hareketleri kas bölgesine göre kodlu listeler. Örneğin `B1 - Ayakta dambıllı calf raise`. Harekete tıklanınca yapılışı, çalışan kaslar, uyarılar ve o harekete ait günlük kayıtları açılır.
-
-## HTML ve JavaScript nedir?
-
-HTML (`.html`) sayfanın iskeletidir: başlıkları, menüleri, tabloları, formları ve popup kutularını tanımlar. JavaScript (`.js`) sayfanın davranışıdır: kayıt ekleme, düzenleme, silme, listeleme ve aynı kaydı farklı sayfalarda gösterme gibi işleri yapar.
-
-## Günlük verisinin akışı
-
-Her günlük satırı en az şu alanları taşır:
+## Günlük veri modeli
 
 ```js
 {
   id: "benzersiz-kayit-kodu",
-  gun: "2026-08-19",
+  gun: "YYYY-AA-GG",
   antrenman: "S1",
-  egzersiz: "Dambıl bench press",
-  agirlik: "10 kg",
-  setTekrar: "3 × 10",
+  egzersiz: "Egzersiz adı",
+  agirlik: "Kullanılan yük",
+  setTekrar: "Set × tekrar",
   aciklama: "İsteğe bağlı not"
 }
 ```
 
-`02-gunluk/gunlukverileri.js` aynı kayıtları üç yerde kullanılabilir hale getirir:
+Aynı kayıt üç görünümde kullanılır:
 
 1. Günlük sayfası kayıtları tarihe göre gruplar.
-2. Antrenman sayfası kayıtları `antrenman` alanına göre süzer.
-3. Egzersiz sayfası kayıtları `egzersiz` alanına göre süzer.
+2. Antrenman kartı kayıtları `antrenman` alanına göre süzer.
+3. Egzersiz kartı kayıtları `egzersiz` alanına göre süzer.
 
-Bu nedenle Günlük sayfasından eklenen tek bir kayıt, ilgili kartın günlüğünde ve ilgili egzersizin popup'ında da görünür.
+GitHub Pages statik olduğu için arayüzden girilen değişiklikler tarayıcının `localStorage` alanında saklanır. Aynı tarayıcıda kalır; cihazlar arasında eşitlenmez. Cihazlar arası eşitleme için ileride çevrim içi veritabanı ve kullanıcı girişi eklenmelidir.
 
-## Kayıt ekleme, düzenleme ve silme
+## Egzersiz adlandırma standardı
 
-Günlük sayfasındaki **Kayıt ekle** düğmesi form popup'ını açar. Gün, kart ve egzersiz zorunludur; ağırlık, set/tekrar ve not isteğe bağlıdır. Bir kaydın altındaki **Düzenle** aynı formu dolu açar. **Sil** onaydan sonra kaydı kaldırır.
+Başlıklarda yalnızca hareketi veya varyasyonu ayırt etmek için gerekli bilgiler tutulur. Bench desteği, oturma ve ayakta durma gibi uygulama ayrıntıları hareketin kimliğini değiştirmiyorsa açıklama ve görselde kalır. `Incline`, `Romanian`, `tek bacak` ve `dar tutuş` gibi hareketi gerçekten farklılaştıran bilgiler başlıkta korunur.
 
-## Veriler nerede saklanır?
+Eski günlük kayıtlarında bulunan uzun adlar silinmez. `04-egzersizler/kodlar.js` içindeki eş-ad tablosu, bunları arayüzde güncel kısa başlıklarla gösterir ve doğru egzersiz kartına bağlar.
 
-GitHub Pages statik bir barındırma hizmetidir; tarayıcı doğrudan repodaki `gunlukverileri.js` dosyasını değiştiremez. Arayüzden yapılan ekleme, düzenleme ve silmeler `localStorage` ile kullanıcının tarayıcısında saklanır.
+## Görseller
 
-- Aynı cihaz ve aynı tarayıcıda sayfa yeniden açılsa da kayıtlar kalır.
-- Başka telefon veya bilgisayara otomatik aktarılmaz.
-- Tarayıcının site verileri temizlenirse yerel değişiklikler silinir ve başlangıç verileri yeniden görünür.
-- Cihazlar arası eşitleme için ileride bir veritabanı ve giriş sistemi eklenmelidir.
+Egzersiz görselleri başlangıç ve bitiş pozisyonlarını, hareket yönünü ve çalışan kas bölgelerini gösterir. Dosyalar `04-egzersizler/gorseller/` klasöründe tutulur; eşlemeleri `egzersizverileri.js` içindedir. Aynı egzersiz farklı antrenmanlarda yer aldığında tek görseli paylaşır.
 
-Başlangıç kayıtları `GUNLUK_BASLANGIC` dizisindedir. Kalıcı olarak herkese yayımlanacak bir kayıt gerekiyorsa bu dizi düzenlenip GitHub'a gönderilmelidir.
-
-## Egzersiz kodları
-
-- `I`: Isınma
-- `G`: Göğüs, omuz ve arka kol
-- `S`: Sırt ve ön kol
-- `B`: Bacak ve kalça
-- `K`: Karın ve merkez bölge
-- `Y`: Yüzme
-
-Kodların eşlemesi `04-egzersizler/kodlar.js` dosyasındadır. Açıklamalar ve görsel eşlemeleri `egzersizverileri.js` içindedir. Egzersiz görselleri `04-egzersizler/gorseller/` klasöründe ayrı PNG dosyaları olarak tutulur. Aynı egzersiz farklı antrenman kartlarında yer aldığında tek görsel eşlemesini paylaşır.
-
-## Yayınlama
-
-Site `main` dalından GitHub Pages ile yayınlanır. Repoya gönderilen değişikliklerin canlı adrese ulaşması kısa bir süre alabilir. Site bir derleme sistemi kullanmaz; HTML, CSS ve JavaScript dosyaları doğrudan tarayıcıda çalışır.
-
-## Bakım kuralı
-
-Sayfa yapısı, klasörler, veri modeli veya kayıt akışı her değiştiğinde bu README aynı değişiklikle birlikte güncellenmelidir.
-
-
-## S3 egzersiz görselleri
-
-S3 antrenman kartındaki altı hareket için başlangıç ve bitiş pozisyonlarını, hareket yönünü ve çalışan kas bölgelerini gösteren görseller eklenmiştir. Görsel dosyaları egzersiz adlarıyla eşleştirilir; hem antrenman kartındaki hareket popup'ında hem Egzersizler sayfasındaki popup'ta görünür.
-
-
-## Son veri güncellemesi
-
-21 Ağustos 2026 tarihli S3 antrenmanı dört egzersiz kaydıyla başlangıç verilerine eklenmiştir. Başlangıç verisi sürümleme mekanizması, yayımlanan yeni kayıtları tarayıcıdaki mevcut kişisel kayıtları silmeden birleştirir.
-
-
-19 Ağustos 2026 tarihli S1 antrenmanına Incline dambıl press (10 kg, 3 × 10) kaydı sonradan eklenmiştir.
-
-
-## Temel kavramlar
-
-Sitede beş ana sayfa bulunur: Ana Sayfa, Program, Günlük, Antrenmanlar ve Egzersizler. Ana sayfa yalnızca bu bölümlere yönlendirir.
-
-- **Antrenman kartı:** Birkaç egzersizin birleşmesiyle oluşan yaklaşık 40 dakikalık çalışma planıdır. S1, E2 ve Y1 gibi kodlar antrenmanları belirtir.
-- **Egzersiz kartı:** Tek bir hareketin nasıl yapılacağını, çalışan kasları, dikkat noktalarını, görselini ve geçmiş yük kayıtlarını gösteren popup'tır.
-- **Günlük kaydı:** Tarih, antrenman, egzersiz, kullanılan yük, set/tekrar ve isteğe bağlı not alanlarından oluşur.
-
-Günlük kayıtlarındaki eski `kart` alanı `antrenman` alanına taşınmıştır. Tarayıcıdaki eski kayıtlar okunurken otomatik dönüştürülür ve kaybolmaz.
+S2 ve S3 antrenmanlarındaki bütün egzersiz kartları görselleştirilmiştir.
 
 ## Popup davranışı
 
-Program ve Antrenmanlar sayfasındaki bir antrenmana basıldığında antrenman kartı popup olarak açılır. Popup açıkken tarayıcının veya telefonun geri tuşu önce popup'ı kapatır. Antrenman içindeki bir egzersize basıldığında egzersiz açıklaması aynı antrenman alanının üzerinde açılır; geri tuşu önce egzersiz açıklamasını, ardından antrenman popup'ını kapatır.
+Program ve Antrenmanlar sayfasındaki bir antrenmana basıldığında antrenman kartı popup olarak açılır. Geri tuşu önce açık egzersiz kartını, ardından antrenman popup'ını kapatır. Programdaki bugünün antrenman düğmesi kategori renginde, alternatifler nötr gri gösterilir.
 
-Program sayfasında bugünün antrenman düğmesi antrenman türünün rengiyle gösterilir. Alternatif antrenmanlar nötr gri kalır.
+## Yayınlama ve bakım
+
+Site `main` dalından GitHub Pages ile yayınlanır. HTML, CSS ve JavaScript doğrudan tarayıcıda çalışır. Klasör yapısı, veri modeli, adlandırma veya ortak davranışlar değiştiğinde README aynı commit içinde güncellenmelidir.

@@ -23,13 +23,13 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Oturarak dambıl shoulder press": {
+  "Dambıl shoulder press": {
     "application": "Dik otur; dambılları omuz hizasından başının üzerine it ve kontrollü biçimde omuz hizasına indir.",
     "muscles": "Omuz ve arka kol",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Tek dambılla overhead triceps extension": {
+  "Dambıl overhead triceps extension": {
     "application": "Dambılı iki elle başının üzerinde tut; dirsekleri sabit tutarak dambılı başının arkasına indirip yukarı uzat.",
     "muscles": "Arka kol",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -41,7 +41,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Bench destekli tek kol dambıl row": {
+  "Tek kol dambıl row": {
     "application": "Bir elini ve dizini bench’e yerleştir; diğer eldeki dambılı dirseği geriye çekerek gövdene yaklaştır.",
     "muscles": "Sırt, arka omuz ve ön kol",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -53,7 +53,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Bench üzerinde dambıl pullover": {
+  "Dambıl pullover": {
     "application": "Bench’e uzan; dambılı iki elle göğsünün üstünden başının arkasına indirip tekrar yukarı getir.",
     "muscles": "Kanat kasları ve göğüs",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -89,7 +89,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Bench üzerinde dambıllı hip thrust": {
+  "Dambıl hip thrust": {
     "application": "Sırtının üst bölümünü bench’e yasla; dambıl kalçanın üzerindeyken kalçayı yukarı kaldırıp tepede sık.",
     "muscles": "Kalça ve arka bacak",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -101,7 +101,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Ayakta dambıllı calf raise": {
+  "Dambıl calf raise": {
     "application": "Dambılları yanlarda tut; topuklarını yükselt, tepede kısa süre bekle ve yavaşça indir.",
     "muscles": "Baldır",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -119,7 +119,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Normal şınav": {
+  "Şınav": {
     "application": "Eller omuzlardan biraz genişken gövdeyi düz tut; göğsü yere yaklaştırıp zemini it.",
     "muscles": "Göğüs, arka kol, ön omuz ve core",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -173,7 +173,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Bant ile oturarak row": {
+  "Bant row": {
     "application": "Bant ayakların çevresindeyken dik otur; dirsekleri geriye çekip kürek kemiklerini yaklaştır.",
     "muscles": "Sırt, arka omuz ve ön kol",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -197,7 +197,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Bant ile tek kol row": {
+  "Tek kol bant row": {
     "application": "Bandı sabitle; tek elle dirseği geriye çekip eli gövdene yaklaştır.",
     "muscles": "Sırt ve ön kol",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -227,7 +227,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Kuru zeminde calf raise": {
+  "Calf raise": {
     "application": "Parmak uçlarında yüksel, tepede bekle ve topukları kontrollü indir.",
     "muscles": "Baldır",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -263,7 +263,7 @@ const EGZERSIZLER={
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
     "easier": "Hareket aralığını, süreyi veya direnci azalt."
   },
-  "Tempolu yüzme, her tekrarda 30 sn ara": {
+  "Tempolu yüzme": {
     "application": "Her 25 metreyi güçlü ama formu bozmayan tempoda yüz; tekrarlar arasında 30 saniye dinlen.",
     "muscles": "Yüzme kondisyonu ve hız",
     "attention": "Hareketi kontrollü yap; keskin ağrı hissedersen dur.",
@@ -298,6 +298,15 @@ const EGZERSIZ_GORSELLERI={
 EGZERSIZ_GORSELLERI["Squat ve bacak ısınması"]="/antrenman-notlarim/04-egzersizler/gorseller/squat-ve-bacak-isinmasi.png";
 EGZERSIZ_GORSELLERI["Goblet squat"]="/antrenman-notlarim/04-egzersizler/gorseller/goblet-squat.png";
 EGZERSIZ_GORSELLERI["Deadlift"]="/antrenman-notlarim/04-egzersizler/gorseller/deadlift.png";
-EGZERSIZ_GORSELLERI["Bench üzerinde dambıllı hip thrust"]="/antrenman-notlarim/04-egzersizler/gorseller/dambilli-hip-thrust.png";
+EGZERSIZ_GORSELLERI["Dambıl hip thrust"]="/antrenman-notlarim/04-egzersizler/gorseller/dambilli-hip-thrust.png";
 EGZERSIZ_GORSELLERI["Bulgarian split squat"]="/antrenman-notlarim/04-egzersizler/gorseller/bulgarian-split-squat.png";
-EGZERSIZ_GORSELLERI["Ayakta dambıllı calf raise"]="/antrenman-notlarim/04-egzersizler/gorseller/ayakta-dambilli-calf-raise.png";
+EGZERSIZ_GORSELLERI["Dambıl calf raise"]="/antrenman-notlarim/04-egzersizler/gorseller/ayakta-dambilli-calf-raise.png";
+
+
+// S2 antrenmanındaki egzersiz görselleri
+EGZERSIZ_GORSELLERI["Omuz ve sırt ısınması"]="/antrenman-notlarim/04-egzersizler/gorseller/omuz-ve-sirt-isinmasi.png";
+EGZERSIZ_GORSELLERI["Tek kol dambıl row"]="/antrenman-notlarim/04-egzersizler/gorseller/tek-kol-dambil-row.png";
+EGZERSIZ_GORSELLERI["Dambıl reverse fly"]="/antrenman-notlarim/04-egzersizler/gorseller/dambil-reverse-fly.png";
+EGZERSIZ_GORSELLERI["Dambıl pullover"]="/antrenman-notlarim/04-egzersizler/gorseller/dambil-pullover.png";
+EGZERSIZ_GORSELLERI["Dambıl biceps curl"]="/antrenman-notlarim/04-egzersizler/gorseller/dambil-biceps-curl.png";
+EGZERSIZ_GORSELLERI["Dambıl hammer curl"]="/antrenman-notlarim/04-egzersizler/gorseller/dambil-hammer-curl.png";

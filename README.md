@@ -56,6 +56,8 @@ Aynı kayıt üç görünümde kullanılır:
 
 GitHub Pages statik olduğu için arayüzden girilen değişiklikler tarayıcının `localStorage` alanında saklanır. Aynı tarayıcıda kalır; cihazlar arasında eşitlenmez. Cihazlar arası eşitleme için ileride çevrim içi veritabanı ve kullanıcı girişi eklenmelidir.
 
+Repoya kalıcı olarak eklenen günlük kayıtları `GUNLUK_BASLANGIC` dizisinde tutulur. `GUNLUK_BASLANGIC_SURUMU` değiştiğinde yeni kayıtlar, tarayıcıdaki mevcut kişisel kayıtlar silinmeden birleştirilir. Başlangıç veri paketi en son 22 Ağustos 2026 tarihli S2 antrenmanıyla güncellenmiştir.
+
 ## Egzersiz adlandırma standardı
 
 Başlıklarda yalnızca hareketi veya varyasyonu ayırt etmek için gerekli bilgiler tutulur. Bench desteği, oturma ve ayakta durma gibi uygulama ayrıntıları hareketin kimliğini değiştirmiyorsa açıklama ve görselde kalır. `Incline`, `Romanian`, `tek bacak` ve `dar tutuş` gibi hareketi gerçekten farklılaştıran bilgiler başlıkta korunur.
